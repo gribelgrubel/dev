@@ -1,0 +1,254 @@
+/* FONTS */
+
+@font-face {
+    font-family: "Px Grotesk";
+    src: url("../fonts/Px Grotesk Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Px Grotesk";
+    src: url("../fonts/Px Grotesk Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Px Grotesk";
+    src: url("../fonts/Px Grotesk Regular Italic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Px Grotesk";
+    src: url("../fonts/Px Grotesk Screen.ttf") format("truetype");
+    font-weight: 400;   /*screen-schnitt, nicht per css selektierbar; nutzt bold-weight als ersatz*/
+    font-style: oblique;
+}
+
+
+/* COLORS */
+.orange{color:rgb(231,95,42)}
+.grey{color:rgb(185,184,184)}
+.green{color:rgb(90,220,129)}
+.yellow{color:rgb(245,255,42)}
+.lila{color:rgb(174,54,248)}
+.blue{color:rgb(0,65,236)}
+
+.pixel{font-style:oblique; letter-spacing:-0.1em; line-height:0.55}
+#landingcanvas .pixel{letter-spacing:-0.25em}
+
+
+/* GENERAL */
+
+* {
+    margin: 0;
+    padding: 0;
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+     box-sizing: border-box; 
+    /*cursor:url("cursor-pointer_small.png"),auto !important;*/
+}
+
+html{scroll-behavior: smooth;}
+
+html,
+body {
+    font-family:"Px Grotesk";
+    letter-spacing:-0.1em;
+}
+
+
+/* HTML Stylings */
+a{text-decoration:none;}
+
+a:visited{color:inherit}
+
+a:hover{
+    font-style:oblique;
+    line-height:0.55;
+    letter-spacing:-0.05em;
+    display:inline-block;
+    -webkit-transform: skewX(-15deg);
+    -moz-transform: skewX(-15deg);
+     -ms-transform: skewX(-15deg);
+      -o-transform: skewX(-15deg);
+         transform: skewX(-15deg);
+}
+
+
+/* Headings */
+h1,h2,h3,h4{font-weight:normal;}
+
+h3{
+    margin:0;
+    font-style:oblique;
+}
+
+
+/* TITLE */
+
+#landingcanvas{
+    display:flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
+    padding-top:5em; /* Hack to keep texttop on screen, don't do this*/
+}
+
+#animCanvas{
+    position:fixed;
+    top:0;
+    left:0;
+    pointer-events:none;
+}
+
+.movetext{
+    font-size:49.8vh; /* fix for all resolutions and aspects*/
+    line-height:0.6;
+    letter-spacing: -0.2em;
+    -webkit-text-stroke: 4px black; /* not fully supported, add solution with 4 text-shadows! */
+    flex-basis: content;
+    margin-right:0.2em;
+    display:inline-block;
+}
+
+#the{}
+#ends{}
+#of{}
+#the{}
+#world{}
+
+
+/* CONTENT */
+
+.content-block{
+    /*margin-top:1em;*/
+    padding: 0 1em;
+    font-size:3em;
+}
+
+.textfrage{
+    margin-bottom:1em;
+}
+
+.textblock{
+    margin-bottom:2em;
+}
+
+
+/* fullPage OVERRIDES */
+
+.fp-controlArrow{
+    width:50% !important;
+    height:100% !important;
+    border:0 !important;
+    top:0 !important;
+}
+
+.fp-prev{left:0; cursor: url(cursor.png),auto !important;}
+.fp-next{right:0; cursor: url(cursor-right.png),auto !important;}
+
+
+/* Swiper */
+.swiper-container {
+    width: 100%;
+    height: auto;
+}
+
+.swiper-button-disabled{
+    opacity:0 !important;
+}
+
+
+/* Pop-Ups */
+.fotopopup{
+    border: 2px solid black;
+    background:white;
+    width:auto;
+    height:auto;
+    display:inline-block;
+    /*
+    position:absolute;
+    top:20px;
+    left:40px;
+    */
+    z-index:999;
+    cursor:grab;
+}
+
+.fotopopup:active{cursor:grabbing;}
+
+.fotoheader{
+    border-bottom: 2px solid black;
+    width:100%;
+    height:2em;
+    font-size:0.5em;
+    padding:0.5em 2em;
+    background:red;
+}
+
+.foto{
+    margin:1em;
+}
+
+.popup-text{
+    padding:1em;
+}
+
+.popup-link{
+    margin:0 1em 1em;
+    padding:0.1em 0.2em;
+    display:inline-block;
+    background:;
+    border:2px solid black;
+}
+
+
+/* TEAM */
+
+#teamtable{
+}
+
+#team th {  /* Team Tabellenheader */
+    font-weight:normal;
+    text-align: left;
+    display:block;
+    margin-top: 1em;
+}
+
+#team tr:nth-child(1) {
+    margin-right:2em;
+}
+
+/* ARMGART Event-Erinnerung */
+#armgart{
+}
+
+.armgart-popup{
+    margin:20vh auto;
+    display: block;
+    width: fit-content;
+    vertical-align: center;
+    /*
+    bottom:20%;
+    left:30%;
+    */
+}
+
+/* FOOTER */
+#footer{
+    border-top:2px solid black;
+    font-size:2em;
+    margin-top:2em;
+    padding:0.5em;
+    position:static;
+    width:100%;
+    bottom:0;
+}
+
+.footer-link{
+    display:inline-block;
+    margin:0 0.5em;
+}
