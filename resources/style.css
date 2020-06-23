@@ -37,7 +37,7 @@
 .lila{color:rgb(174,54,248)}
 .blue{color:rgb(0,65,236)}
 
-.pixel{font-style:oblique; letter-spacing:-0.1em; line-height:0.55}
+.pixel{font-style:oblique;}
 #landingcanvas .pixel{letter-spacing:-0.25em}
 
 
@@ -71,16 +71,23 @@ a:hover{
     line-height:0.55;
     letter-spacing:-0.05em;
     display:inline-block;
+    /*
     -webkit-transform: skewX(-15deg);
     -moz-transform: skewX(-15deg);
      -ms-transform: skewX(-15deg);
       -o-transform: skewX(-15deg);
          transform: skewX(-15deg);
+    */
 }
 
 
 /* Headings */
 h1,h2,h3,h4{font-weight:normal;}
+
+h1, h2{
+    font-size:1em;
+    font-style:oblique;
+}
 
 h3{
     margin:0;
@@ -129,14 +136,38 @@ h3{
     font-size:3em;
 }
 
+.paddingless{
+    padding: 0;
+}
+
 .textfrage{
     margin-bottom:1em;
 }
 
 .textblock{
-    margin-bottom:2em;
+    margin-bottom:1em;
+    line-height:1.05;
 }
 
+.grosstext{
+    font-size:1.9em;
+    letter-spacing:-0.05em;
+    font-style:oblique;
+}
+
+.smalltext{font-size:2em;}
+
+.spacer{
+    margin:8em auto;
+    vertical-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spacer-small{
+    margin:4em auto;
+}
 
 /* fullPage OVERRIDES */
 
@@ -160,6 +191,22 @@ h3{
 .swiper-button-disabled{
     opacity:0 !important;
 }
+
+.swiper-button-next, .swiper-button-prev{
+    width:50% !important;
+    height:100% !important;
+    top:0 !important;
+}
+.swiper-button-prev{
+    cursor: url(cursor.png),auto !important;
+}
+.swiper-button-next{
+    cursor: url(cursor-right.png),auto !important;
+}
+.swiper-button-next:after, .swiper-button-prev:after{
+    display:none;
+}
+.swiper-button-prev:focus, .swiper-button-next:focus{outline-width:0;}
 
 
 /* Pop-Ups */
