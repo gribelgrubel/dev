@@ -458,6 +458,8 @@
         var wordCount = words.length;
         var word;
         var fontSize = 450; //this has to be dynamic based on screen dimensions
+        var fontStyle = "normal";  // normal or oblique, alternating on edgecollision
+        var fontCase = 0; // 0: normal, 1: oblique
 
         // function to generate random number
 
@@ -466,42 +468,46 @@
           // if min = 10 max = 15 random var = 0.1544465; it will return approzimately 10 because of math.floor
           return num;
         }
-        var h1 = document.querySelector('h1');
-
+        var h1 = document.querySelector('h1');  //what's this for?
 
         function Ball(identifier) {
           this.x = random(0, width);
           this.y = random(0, height);
           this.velX = random(-7, 7);
           this.velY = random(-7, 7);
+            // when -1 < velocity < 1 
           this.color = colors[identifier];
           this.size = 1;    //lower left edge, remove this later
           this.word = words[identifier];
-          this.textWidth = ctx.measureText(this.word).width;
-          console.log(this.textWidth)
+          //this.textWidth = ctx.measureText(this.word).width;  //give very small values, since textsize not yet declared?
+          //console.log("Word "+identifier+" width: "+this.textWidth)
         }
         Ball.prototype.draw = function() {
           ctx.beginPath();
           ctx.fillStyle = this.color;
           ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
           ctx.fill();
-            ctx.font = fontSize+"px PX Grotesk";
+            ctx.font = fontStyle + " "+ fontSize + "px PX Grotesk";
             ctx.fillText(this.word,this.x,this.y);
+            
+            //this.textWidth = ctx.measureText(this.word).width;    //gives correct values, but makes text jitter vertically
+            //console.log("Word width: "+this.textWidth)
+            
             ctx.strokeStyle = 'black';
             ctx.lineWidth = 2;
             ctx.strokeText(this.word,this.x,this.y);
         }
 
         Ball.prototype.update = function() {
-          if ((this.x + this.textWidth) >= width) {
+          if ((this.x + this.size) >= width) {
             this.velX = -(this.velX);
           }
 
-          if ((this.x - this.textWidth) <= 0) {
+          if ((this.x - this.size) <= 0) {
             this.velX = -(this.velX);
           }
 
-            // has to work with current fontSize, but doesnt - why?
+            // has to work with current fontSize instead of size, but doesnt - why?
           if ((this.y + this.size) >= height) {
             this.velY = -(this.velY);
           }
@@ -527,6 +533,11 @@
             }
           }
         }
+        
+        function fontStyleChange() {
+            
+        }
+        
         function loop() {
           ctx.clearRect(0, 0, width, height);
 

@@ -52,7 +52,10 @@
     /*cursor:url("cursor-pointer_small.png"),auto !important;*/
 }
 
+/* weird behavior below, do it with javascript scrolltotop instead, no other use*/
+/*
 html{scroll-behavior: smooth;}
+*/
 
 html,
 body {
@@ -132,8 +135,8 @@ h3{
 
 .content-block{
     /*margin-top:1em;*/
-    padding: 0 1em;
-    font-size:3em;
+    padding: 0 0.25em;
+    font-size:3.5em;
 }
 
 .paddingless{
