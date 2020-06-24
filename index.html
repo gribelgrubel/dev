@@ -106,53 +106,37 @@
             
             <div class="section paddingless" id="fotocarousel">
                 
-                <h1 class="marginchilds bordered orange">Galerien</h1>
+                <h1 class="marginchild bordered orange">Galerien</h1>
                 
-                <h2 class="marginchilds galeriecatg blue">↓ Stadtrundgang</h2>
-                
-                <!-- Slider main container -->
-                <div class="swiper-container">
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        <!-- Slides -->
-                        <div class="swiper-slide"><img src="img/litfass.jpg" class=foto></div>
-                        <div class="swiper-slide"><img src="img/billboard.jpg" class=foto></div>
-                        <div class="swiper-slide"><img src="img/litfass.jpg" class=foto></div>
-                        <div class="swiper-slide"><img src="img/subway-ad.jpg" class=foto></div>
+                <div class="galeriecatg marginchild">
+                    <h2 class="blue">↓ Stadtrundgang</h2>
+                    <!-- Slider main container -->
+                    <div class="swiper-container">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <!-- Slides -->
+                            <div class="swiper-slide"></div>
+                            <div class="swiper-slide"><img src="img/litfass.png" class=foto></div>
+                            <div class="swiper-slide"><img src="img/billboard.png" class=foto></div>
+                            <div class="swiper-slide"><img src="img/litfass.png" class=foto></div>
+                            <div class="swiper-slide"><img src="img/subway-ad.png" class=foto></div>
+                        </div>
+                        <!-- navigation buttons -->
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
                     </div>
-
-                    <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-
                 </div>
                 
-                <h2 class="marginchilds green" id="clicktest">↓ Social Media</h2>
-                <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
-                <h2 class="marginchilds galeriecatg grey">↓ Rundgang 2019/20</h2>
+                <div class="galeriecatg marginchild">
+                    <h2 class="green" id="clicktest">↓ Social Media</h2>
+                    <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
+                </div>
                 
-                <!--
-                <div class="fotopopup randompos" id="">
-                    <div class="fotoheader randomcolor"></div>
-                    <img src="img/litfass.jpg" class=foto>
+                <div class="galeriecatg marginchild">
+                    <h2 class="grey" id="clicktest">↓ Rundgang 2019/20</h2>
+                    <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
                 </div>
-                <div class="fotopopup randompos" id="">
-                    <div class="fotoheader randomcolor"></div>
-                    <img src="img/subway-ad.jpg" class=foto>
-                </div>
-                <div class="fotopopup randompos" id="">
-                    <div class="fotoheader randomcolor"></div>
-                    <img src="img/billboard.jpg" class=foto>
-                </div>
-                <div class="fotopopup randompos" id="">
-                    <div class="fotoheader randomcolor"></div>
-                    <img src="img/litfass.jpg" class=foto>
-                </div>
-                <div class="fotopopup randompos" id="">
-                    <div class="fotoheader randomcolor"></div>
-                    <img src="img/billboard.jpg" class=foto>
-                </div>
-                -->
+                                
             </div>
             
             <div class="section content-block" id="team">
@@ -212,8 +196,8 @@
             
             <div class="section content-block spacer-top" id="armgart">
                 <h1 class="green bordered">Ausblick</h1>
-                <p class="textblock">Wir freuen uns auf den Rundgang Armgartstraße Anfang 2021. Wir freuen uns sehr, euch alle dort zu treffen.</p>
-                <p class="textblock"><a href="">Erinner' mich dran, sobald es ein Datum gibt!</a></p>   
+                <p class="textblock">Wir freuen uns darauf, euch auf dem Rundgang Armgartstraße Anfang 2021 wieder alle dort zu treffen. Sobald ein genauerer Termin feststeht, informieren wir euch hier!</p>
+                <!-- <p class="textblock"><a href="">Erinner' mich dran, sobald es ein Datum gibt!</a></p>   -->
                 <div id="backtotop"><a href="#">↑</a></div>
             </div>
             
@@ -231,24 +215,7 @@
 
         </div>
         
-        <!-- initialize fullPage -->
-        <!--
-        <script>
-            new fullpage('#fullpage', {
-            //options here
-                anchors:["firstPage"],
-            licenseKey:"4C643ACF-EF8B4E8B-A589B1E4-6521CD88",
-            fadingEffect:'slide',
-            dragAndMove:'fingersonly',
-            //autoScrolling:true,
-            //scrollHorizontally: true
-            });
-
-            //methods
-            //fullpage_api.setAllowScrolling(false);
-        </script>
-        -->
-        
+        <!-- canvas für die bewegte Typoebene -->
         <canvas id="animCanvas" width="480" height="320"></canvas>
         
         <!-- load swiper -->
@@ -266,7 +233,7 @@
     -->
     
     <script>
-
+            //drag an element around! (not needed anymore)
             //called when mouse hovers over a .fotopopup
             function dragElement(elmnt) {
               var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -335,6 +302,7 @@
                     $(this).attr("style","left:"+(Math.random() * ($(window).width() - divWidth)).toFixed()+"px; top:"+(Math.random() * ($(window).height() - divHeight)).toFixed()+"px");
                 });
                 
+                /*
                 //Armgart-Popup Buttonfarbe-Angleich
                 $('.armgart-popup .popup-link').attr( "style", $('.armgart-popup .fotoheader').attr("style") );
                 // center Armgart-Popup on screen
@@ -342,63 +310,76 @@
                 var top = ($(window).height() - $(".armgart-popup").height()) / 2;
                 console.log(left);
                 $('.armgart-popup').position({top: top + 'px', left: left + 'px'});
-                
+                */
 
                 //SWIPER
                 //initialize swiper when document ready
-                  var mySwiper = new Swiper ('.swiper-container', {
+                var mySwiper = new Swiper ('.swiper-container', {
                     // Optional parameters
                     direction: 'horizontal',
                     loop: false,
-                    slidesPerView: "2",
+                    slidesPerView: 2,
+                    spaceBetween: 20,
                     centeredSlides: true,
-                      
+                    centerInsufficientSlides: true,
+                    autoHeight: true,
+
+                    // Navigation arrows
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    }
+
                     // add these together with mobile css!
                     /*
                     breakpoints: {
-                        // when window width is >= 320px
-                        320: {
-                          slidesPerView: 2,
-                          spaceBetween: 20
-                        },
-                        //aspect ratio width/height of >=0.75
-                        '@0.75': {
-                          slidesPerView: 2,
-                          spaceBetween: 20,
-                        },
+                    // when window width is >= 320px
+                    320: {
+                    slidesPerView: 2,
+                    spaceBetween: 20
+                    },
+                    //aspect ratio width/height of >=0.75
+                    '@0.75': {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                    },
                     }
                     */
-                      
-                    // Navigation arrows
-                    navigation: {
-                      nextEl: '.swiper-button-next',
-                      prevEl: '.swiper-button-prev',
-                    }
-                  });
-                
-                /* SLIDER für Galerien Expand*/
-                
-                /*
-                $( ".galeriecatg" ).each(function() {
-                    // child of this galeriecatg slides in/out
-                    $(this ".coming-soon" ).slideToggle( "slow", function() {
-                    // Animation complete.
-                  });
-                }
-                */
-
-                
-                $( ".galeriecatg" ).click(function() {
-                  $( ".swiper-container" ).slideToggle( "slow", function() {
-                    // Animation complete.
-                  });
+                    
+                    /* BETTER instead of having multiple loading sliders: https://swiperjs.com/api/#virtual */
                 });
                 
                 
-                $( "#clicktest" ).click(function() {
-                  $( ".coming-soon" ).slideToggle( "slow", function() {
-                    // Animation complete.
-                  });
+                /* instantly collapse sliders at start! */
+                $( ".swiper-container" ).each(function() {
+                    $(this).slideToggle( 0, function() {});
+                });
+
+                /* SLIDER für Galerien Expand*/
+                
+                
+                $( ".galeriecatg" ).each(function() {
+                    // child of this galeriecatg slides in/out
+                    $(this).click(function() {
+                        
+                        // do this with slideUp() and slideDown() to return to start and stuff
+                        $(this).find(".swiper-container").slideToggle( "slow", function() {
+                            // Animation complete.
+                            mySwiper.slideNext(300);    
+                            //mySwiper.slideTo(0, 300);
+                        });
+                    })
+                });
+                
+                $( ".galeriecatg" ).each(function() {
+                    // child of this galeriecatg slides in/out
+                    $(this).click(function() {
+                        
+                        // do this with slideUp() and slideDown() to return to start and stuff
+                        $(this).find(".coming-soon").slideToggle( "slow", function() {
+                            // Animation complete.
+                        });
+                    })
                 });
                 
                 
@@ -499,112 +480,120 @@
 
         var width = canvas.width = window.innerWidth;
         var height = canvas.height = window.innerHeight;
-        
+
         var colors = ["rgb(245,255,42)", "rgb(185,184,184)", "rgb(90,220,129)", "rgb(174,54,248)", "rgb(231,95,42)", "rgb(0,65,236)"];
         var words = ["the", "end(s)", "of", "the", "world", "?"];
         var wordCount = words.length;
         var word;
         var fontSize = 450; //this has to be dynamic based on screen dimensions
-        var fontStyle = "normal";  // normal or oblique, alternating on edgecollision
+        var fontStyle = "normal"; // normal or oblique, alternating on edgecollision
         var fontCase = 0; // 0: normal, 1: oblique
 
         // function to generate random number
 
-        function random(min,max) {
-          var num = Math.floor(Math.random()*(max-min)) + min;
-          // if min = 10 max = 15 random var = 0.1544465; it will return approzimately 10 because of math.floor
-          return num;
+        function random(min, max) {
+            var num = Math.floor(Math.random() * (max - min)) + min;
+            // if min = 10 max = 15 random var = 0.1544465; it will return approzimately 10 because of math.floor
+            return num;
         }
-        var h1 = document.querySelector('h1');  //what's this for?
 
         function Ball(identifier) {
-          this.x = random(0, width);
-          this.y = random(0, height);
-          this.velX = random(-7, 7);
-          this.velY = random(-7, 7);
+            this.x = random(0, width);  //was 0, width; but this makes thigns get stuck
+            this.y = random(0+fontSize, height); //was 0, height; but this makes thigns get stuck
+            this.velX = random(-7, 7);
+            this.velY = random(-7, 7);
             // when -1 < velocity < 1 
-          this.color = colors[identifier];
-          this.size = 1;    //lower left edge, remove this later
-          this.word = words[identifier];
-          //this.textWidth = ctx.measureText(this.word).width;  //give very small values, since textsize not yet declared?
-          //console.log("Word "+identifier+" width: "+this.textWidth)
+            this.color = colors[identifier];
+            this.size = 1; //lower left edge, remove this later
+            this.word = words[identifier];
+            //this.textWidth = ctx.measureText(this.word).width;  //give very small values, since textsize not yet declared?
+            //console.log("Word "+identifier+" width: "+this.textWidth)
+
+            ctx.font = fontStyle + " " + fontSize + "px PX Grotesk";
+            ctx.fillText(this.word, this.x, this.y);
+            this.textWidth = ctx.measureText(this.word).width; //gives correct values, but makes text jitter vertically
+            console.log("Word width: " + this.textWidth)
         }
+
         Ball.prototype.draw = function() {
-          ctx.beginPath();
-          ctx.fillStyle = this.color;
-          ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-          ctx.fill();
-            ctx.font = fontStyle + " "+ fontSize + "px PX Grotesk";
-            ctx.fillText(this.word,this.x,this.y);
-            
+            ctx.beginPath();
+            ctx.fillStyle = this.color;
+            ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI); //text origin: bottom left corner (canvas gets drawn from top left)
+            //ctx.rect(this.x, this.y - fontSize, this.x+this.textWidth, this.y); //object boundaries
+            ctx.fill();
+            ctx.font = fontStyle + " " + fontSize + "px PX Grotesk";
+            ctx.fillText(this.word, this.x, this.y);
+
             //this.textWidth = ctx.measureText(this.word).width;    //gives correct values, but makes text jitter vertically
             //console.log("Word width: "+this.textWidth)
-            
+
             ctx.strokeStyle = 'black';
             ctx.lineWidth = 2;
-            ctx.strokeText(this.word,this.x,this.y);
+            ctx.strokeText(this.word, this.x, this.y);
         }
 
         Ball.prototype.update = function() {
-          if ((this.x + this.size) >= width) {
-            this.velX = -(this.velX);
-          }
+            //compare right wordedge and right screenborder
+            if ((this.x + this.textWidth) >= width) {
+                this.velX = -(this.velX);
+            }
 
-          if ((this.x - this.size) <= 0) {
-            this.velX = -(this.velX);
-          }
+            // compare left wordedge and left screenborder
+            if ((this.x/* - this.textWidth*/) <= 0) {
+                this.velX = -(this.velX);
+            }
 
-            // has to work with current fontSize instead of size, but doesnt - why?
-          if ((this.y + this.size) >= height) {
-            this.velY = -(this.velY);
-          }
+            // compare font baseline with bottom screenedge
+            if ((this.y + this.size) >= height) {
+                this.velY = -(this.velY);
+            }
 
-          if ((this.y - this.size) <= 0) {
-            this.velY = -(this.velY);
-          }
+            // compare font height with top screenedge; font boundaries are larger than visuals, so wing it a bit
+            if ((this.y - (fontSize/1.5)) <= 0) {
+                this.velY = -(this.velY);
+            }
 
-          this.x += this.velX;
-          this.y += this.velY;
+            this.x += this.velX;
+            this.y += this.velY;
         }
         var balls = [];
         Ball.prototype.collisionDetect = function() {
-          for (j = 0; j < balls.length; j++) {
-            if ( (!(this.x === balls[j].x && this.y === balls[j].y && this.velX === balls[j].velX && this.velY === balls[j].velY)) ) {
-              var dx = this.x - balls[j].x;
-              var dy = this.y - balls[j].y;
-              var distance = Math.sqrt(dx * dx + dy * dy);
+            for (j = 0; j < balls.length; j++) {
+                if ((!(this.x === balls[j].x && this.y === balls[j].y && this.velX === balls[j].velX && this.velY === balls[j].velY))) {
+                    var dx = this.x - balls[j].x;
+                    var dy = this.y - balls[j].y;
+                    var distance = Math.sqrt(dx * dx + dy * dy);
 
-              if (distance < this.size + balls[j].size) {
-                balls[j].color = this.color = 'rgb(' + random(0, 255) + ',' + random(0, 255) + ',' + random(0, 255) +')';
-              }
+                    if (distance < this.size + balls[j].size) {
+                        balls[j].color = this.color = 'rgb(' + random(0, 255) + ',' + random(0, 255) + ',' + random(0, 255) + ')';
+                    }
+                }
             }
-          }
         }
-        
-        function fontStyleChange() {
-            
-        }
-        
-        function loop() {
-          ctx.clearRect(0, 0, width, height);
 
-          while (balls.length < wordCount) {
-              for(i=0;i < words.length; i++){
+        function fontStyleChange() {
+
+        }
+
+        function loop() {
+            ctx.clearRect(0, 0, width, height);
+
+            while (balls.length < wordCount) {
+                for (i = 0; i < words.length; i++) {
                     var ball = new Ball(i);
                     balls.push(ball);
-                  }
-          }
+                }
+            }
 
-          for (i = 0; i < balls.length; i++) {
-            balls[i].draw();
-            balls[i].update();
-          }
+            for (i = 0; i < balls.length; i++) {
+                balls[i].draw();
+                balls[i].update();
+            }
 
-          requestAnimationFrame(loop);
+            requestAnimationFrame(loop);
         }
         loop();
-
-  </script>
+    </script>
 	
 
 
