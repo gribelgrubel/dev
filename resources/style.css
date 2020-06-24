@@ -95,16 +95,21 @@ h1, h2{
 h3{
     margin:0;
     font-style:oblique;
+    font-size: 1em;
 }
 
 
 /* TITLE */
 
-#landingcanvas{
+#landingcanvas {
+    /*
     display:flex;
     justify-content: space-between;
     flex-wrap:wrap;
+    */
     padding-top:5em; /* Hack to keep texttop on screen, don't do this*/
+    width:100%;
+    min-height:calc(100vh - 4em);
 }
 
 #animCanvas{
