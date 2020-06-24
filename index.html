@@ -303,6 +303,7 @@
         var wordCount = words.length;
         var word;
         var fontSize; //this is dynamic based on screen dimensions, filled in resizeCanvas()
+        var targetFontSize;
         var minFontSize;    // the smallest the font should be, based on fontSize
         var maxFontSize;
         if (window.screen.width * window.devicePixelRatio > window.screen.height * window.devicePixelRatio) {
@@ -333,7 +334,7 @@
             this.x = random(0, -width/2);  //was 0, width; this spawns them only the first screen quarter, so no long word gets stuck
             this.y = random(0+fontSize, height); //was 0, height; but this makes thigns get stuck
             // move all things in from one side and out from another? this might help with creating intro & outro states
-            this.velX = random(2, 7);  //was -7,7; now only positive to make things slide in from beyond the left canvas border
+            this.velX = random(4, 7);  //was -7,7; now only positive to make things slide in from beyond the left canvas border
             this.velY = random(-7, 7);
             // when -1 < velocity < 1 
             this.color = colors[identifier];
@@ -347,7 +348,7 @@
             ctx.fillText(this.word, this.x, this.y);
             this.textWidth = ctx.measureText(this.word).width;
             this.defaultTextWidth = this.textWidth;
-            this.x = -this.textWidth*1.3;
+            this.x = -this.textWidth*1.5;
             //console.log("Word width: "+this.textWidth)
             
             this.introState = true; // true when spawning for as long as the word is outside the canvas bounds, to prevent getting stuck in velocity switching
@@ -395,7 +396,18 @@
                 this.y += this.velY;
             } else {
                 this.timeCount++;
-                console.log("timeCount: "+this.timeCount+ "; index: "+this.index);
+                //console.log("timeCount: "+this.timeCount+ "; index: "+this.index);
+            }
+            
+            
+            if (fontSize > targetFontSize) {
+                fontSize--;
+                console.log("shrinking");
+            }  else if (fontSize == targetFontSize) {
+                targetFontSize = fontSize;
+            }  else if (fontSize < targetFontSize) {
+                fontSize++;
+                console.log("growing");
             }
             
             /*
@@ -458,21 +470,24 @@
             function scrollFunction() {
                 
               if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-                  for (i = 0;i+minFontSize<fontSize;i++) {
-                      fontSize -= 1;
+
+                      targetFontSize = minFontSize;
                       
+                      /*
                       for (i=0;i<wordCount;i++){
                           balls[i].textWidth = balls[i].textWidth * 0.98
                       }
-                  }
+                      */
+                  
               } else if (document.body.scrollTop < 80 || document.documentElement.scrollTop < 80) {
-                for (i = 0;i+fontSize<maxFontSize;i++) {
-                      fontSize += 1;
-                    
+
+                      targetFontSize = maxFontSize;
+                    /*
                     for (i=0;i<wordCount;i++){
                           balls[i].textWidth = balls[i].defaultTextWidth;
                       }
-                }
+                      */
+                
               }
                 
                 
