@@ -28,7 +28,7 @@
         <div id="fullpage">
 
             <div id="landingcanvas">
-                <div class="footer-link" style="margin:0.25em;position:absolute;top:0;right:0;font-size:5em;">
+                <div class="footer-link" style="margin:0.25em;position:absolute;top:0;right:0;font-size:4em;">
                         <a class="smicon" target="_blank" href="https://design.haw-hamburg.de/home/das-department-design/">
                         <img class="footerlogo" src="resources/haw-logo.svg" alt="HAW Hamburg"></a>
                 </div>
@@ -111,7 +111,7 @@
                 <h2 class="marginchilds galeriecatg blue">↓ Stadtrundgang</h2>
                 
                 <!-- Slider main container -->
-                <div class="swiper-container">
+                <div class="swiper-container" style="display:none"> <!-- hide !-->
                     <!-- Additional required wrapper -->
                     <div class="swiper-wrapper">
                         <!-- Slides -->
@@ -127,7 +127,8 @@
 
                 </div>
                 
-                <h2 class="marginchilds galeriecatg green">↓ Social Media</h2>
+                <h2 class="marginchilds green" id="clicktest">↓ Social Media</h2>
+                <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
                 <h2 class="marginchilds galeriecatg grey">↓ Rundgang 2019/20</h2>
                 
                 <!--
@@ -154,14 +155,14 @@
                 -->
             </div>
             
-            <div class="section content-block" id="team">
+            <div class="section content-block bordered" id="team">
                 
-                <h1 class="marginless">Team</h1>
+                <h1 class="marginless green">Team</h1>
                 <div class="content_text">
                     <p>Das Erscheinungsbild des Rundgang Finkenau 2020 wurde von Studierenden des Studiengang Kommunikationsdesign an der Fakultät DMI der HAW Hamburg unter der Leitung von Paul Rutrecht und Hendrike Schmietendorf gestaltet: Frederik Engelbrecht, Georg Randel, Janna Thaden, Laura Dunse, Mert Ekinci, Rebecca Söhlke.</p>
                     <table id="teamtable">
                         <tr>
-                            <th><h2>Studierende</h2></th>
+                            <th><h2 class="orange bordered">Studierende</h2></th>
                         </tr>
                         <tr>
                             <td>Georg Randel</td>
@@ -184,21 +185,21 @@
                             <td>rebeccasoehlke@web.de</td>
                         </tr>
                         <tr>
-                            <th><h2>Code</h2></th>
+                            <th><h2 class="lila bordered">Code</h2></th>
                         </tr>
                         <tr>
                             <td>Frederik Engelbrecht</td>
                             <td>fre.engelbrecht@gmail.com</td>
                         </tr>
                         <tr>
-                            <th><h2>Betreuung</h2></th>
+                            <th><h2 class="blue bordered">Betreuung</h2></th>
                         </tr>
                         <tr>
                             <td>Paul Rutrecht</td>
                             <td>mail@paulrutrecht.de</td>
                         </tr>
                         <tr>
-                            <th><h2>Kommunikation</h2></th>
+                            <th><h2 class="grey bordered">Kommunikation</h2></th>
                         </tr>
                         <tr>
                             <td>Hendrike Schmietendorf</td>
@@ -212,7 +213,7 @@
             <div class="section content-block spacer-top" id="armgart">
                 <h1 class="green bordered">Ausblick</h1>
                 <p class="textblock">Wir freuen uns auf den Rundgang Armgartstraße Anfang 2021. Wir freuen uns sehr, euch alle dort zu treffen.</p>
-                <p class="textblock"><a href="">Erinner' mich dran!</a></p>   
+                <p class="textblock"><a href="">Erinner' mich dran, sobald es ein Datum gibt!</a></p>   
                 <div id="backtotop"><a href="#">↑</a></div>
             </div>
             
@@ -378,6 +379,12 @@
                 /* SLIDER für Galerien Expand*/
                 $( ".galeriecatg" ).click(function() {
                   $( ".swiper-container" ).slideToggle( "slow", function() {
+                    // Animation complete.
+                  });
+                });
+                
+                $( "#clicktest" ).click(function() {
+                  $( ".coming-soon" ).slideToggle( "slow", function() {
                     // Animation complete.
                   });
                 });
