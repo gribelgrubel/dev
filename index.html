@@ -488,6 +488,8 @@
         var fontSize = 450; //this has to be dynamic based on screen dimensions
         var fontStyle = "normal"; // normal or oblique, alternating on edgecollision
         var fontCase = 0; // 0: normal, 1: oblique
+        
+        var scroll; //gets scroll distance from top
 
         // function to generate random number
 
@@ -498,21 +500,23 @@
         }
 
         function Ball(identifier) {
-            this.x = random(0, width);  //was 0, width; but this makes thigns get stuck
+            this.x = random(0, width/4);  //was 0, width; this spawns them only the first screen quarter, so no long word gets stuck
             this.y = random(0+fontSize, height); //was 0, height; but this makes thigns get stuck
+            // move all things in from one side and out from another? this might help with creating intro & outro states
             this.velX = random(-7, 7);
             this.velY = random(-7, 7);
             // when -1 < velocity < 1 
             this.color = colors[identifier];
-            this.size = 1; //lower left edge, remove this later
+            this.size = 1; //lower left edge, only for dev purposes
             this.word = words[identifier];
-            //this.textWidth = ctx.measureText(this.word).width;  //give very small values, since textsize not yet declared?
-            //console.log("Word "+identifier+" width: "+this.textWidth)
-
+            
+            //getTextWidth(this);   //cant return valid values
+            //draw text once to get correct textWidth
             ctx.font = fontStyle + " " + fontSize + "px PX Grotesk";
             ctx.fillText(this.word, this.x, this.y);
-            this.textWidth = ctx.measureText(this.word).width; //gives correct values, but makes text jitter vertically
-            console.log("Word width: " + this.textWidth)
+            this.textWidth = ctx.measureText(this.word).width;
+            this.defaultTextWidth = this.textWidth;
+            console.log("Word width: "+this.textWidth)
         }
 
         Ball.prototype.draw = function() {
@@ -523,10 +527,6 @@
             ctx.fill();
             ctx.font = fontStyle + " " + fontSize + "px PX Grotesk";
             ctx.fillText(this.word, this.x, this.y);
-
-            //this.textWidth = ctx.measureText(this.word).width;    //gives correct values, but makes text jitter vertically
-            //console.log("Word width: "+this.textWidth)
-
             ctx.strokeStyle = 'black';
             ctx.lineWidth = 2;
             ctx.strokeText(this.word, this.x, this.y);
@@ -548,13 +548,19 @@
                 this.velY = -(this.velY);
             }
 
-            // compare font height with top screenedge; font boundaries are larger than visuals, so wing it a bit
+            // compare font height with top screenedge; font boundaries are larger than visuals, so reduce a bit
             if ((this.y - (fontSize/1.5)) <= 0) {
                 this.velY = -(this.velY);
             }
 
             this.x += this.velX;
             this.y += this.velY;
+            
+            /*
+            if(scroll>0.1){
+                fontSize = fontSize*scroll;
+            }
+            */
         }
         var balls = [];
         Ball.prototype.collisionDetect = function() {
@@ -571,10 +577,25 @@
             }
         }
 
+        
         function fontStyleChange() {
-
+        
         }
+        
+        /*
+        //broken, doesnt seem to be able to paint on canvas to get width
+        function getTextWidth(object) {
+            var newTextWidth;
+            var test = "woah!";
+            ctx.font = fontStyle + " " + fontSize + "px PX Grotesk";
+            ctx.fillText(object.word, object.x, object.y);
+            object.textWidth = ctx.measureText(object.word).width; //gives correct values, but makes text jitter vertically
+            //return newTextWidth;
+            return test;
+        }
+        */
 
+        
         function loop() {
             ctx.clearRect(0, 0, width, height);
 
@@ -589,10 +610,35 @@
                 balls[i].draw();
                 balls[i].update();
             }
+            
+            // this is shitty, but works mostly
+            window.onscroll = function() {scrollFunction()};
+            function scrollFunction() {
+              if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+                  for (i = 0;i+100<fontSize;i++) {
+                      fontSize -= 1;
+                      
+                      for (i=0;i<balls.length;i++){
+                          balls[i].textWidth = balls[i].textWidth * 0.95
+                      }
+                  }
+              } else {
+                for (i = 0;i+fontSize<450;i++) {
+                      fontSize += 1;
+                    
+                    for (i=0;i<balls.length;i++){
+                          balls[i].textWidth = balls[i].defaultTextWidth;
+                      }
+                }
+              }
+            }
 
             requestAnimationFrame(loop);
         }
+        
         loop();
+             
+        
     </script>
 	
 
