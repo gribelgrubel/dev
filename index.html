@@ -94,11 +94,19 @@
                 </div>
             </div>
             
+            <!--
             <div class="content-block">
                 <p class="grosstext spacer">Mit Blick auf eine aktuell schwer planbare Zukunft fragen Studierende aus dem Kommunikationsdesign der HAW Hamburg nach der praktischen Rolle von Design.</p>
             </div>
-
+            -->
+            
             <div class="section paddingless" id="fotocarousel">
+                
+            <h1 class="marginchilds"><a href="">Galerien</a></h1>
+                
+                <h2 class="marginchilds galeriecatg">> Stadtrundgang</h2>
+                
+                
                 <!-- Slider main container -->
                 <div class="swiper-container">
                     <!-- Additional required wrapper -->
@@ -115,6 +123,9 @@
                     <div class="swiper-button-next"></div>
 
                 </div>
+                
+                <h2 class="marginchilds galeriecatg"><a href="" class="blue">> Social Media</a></h2>
+                <h2 class="marginchilds galeriecatg"><a href="" class="grey">> Rundgang 2019</a></h2>
                 
                 <!--
                 <div class="fotopopup randompos" id="">
@@ -140,14 +151,14 @@
                 -->
             </div>
             
-            <div class="section content-block smalltext pixel" id="team">
+            <div class="section content-block" id="team">
                 
-                <h1 class="green">Team</h1>
+                <h1 class="marginless">Team</h1>
                 <div class="content_text">
                     <p>Das Erscheinungsbild des Rundgang Finkenau 2020 wurde von Studierenden des Studiengang Kommunikationsdesign an der Fakultät DMI der HAW Hamburg unter der Leitung von Paul Rutrecht und Hendrike Schmietendorf gestaltet: Frederik Engelbrecht, Georg Randel, Janna Thaden, Laura Dunse, Mert Ekinci, Rebecca Söhlke.</p>
                     <table id="teamtable">
                         <tr>
-                            <th><h2 class="orange">Studierende</h2></th>
+                            <th><h2>Studierende</h2></th>
                         </tr>
                         <tr>
                             <td>Frederik Engelbrecht</td>
@@ -174,14 +185,14 @@
                             <td>mail@mail.de</td>
                         </tr>
                         <tr>
-                            <th><h2 class="lila">Betreuung</h2></th>
+                            <th><h2>Betreuung</h2></th>
                         </tr>
                         <tr>
                             <td>Paul Rutrecht</td>
                             <td>paul.m.rutrecht@gmail.com</td>
                         </tr>
                         <tr>
-                            <th><h2 class="blue">Kommunikation</h2></th>
+                            <th><h2>Kommunikation</h2></th>
                         </tr>
                         <tr>
                             <td>Hendrike Schmietendorf</td>
@@ -192,20 +203,19 @@
                 
             </div>
             
-            <div class="section content-block" id="armgart">
-                <p class="textblock spacer-small">Der Rundgang Armgartstraße ist für Ende Januar 2021 geplant. Wir freuen uns sehr, euch alle dort zu treffen.</p>
-                <div class="fotopopup armgart-popup" id="">
-                    <div class="fotoheader randomcolor"> 30.01. - 01.02.2021</div>
-                    <div class="popup-text">Rundgang Armgartstraße 2021</div>
-                    <div class="popup-link"><a href="">Vormerken</a></div>
-                </div>    
+            <div class="section content-block spacer-small" id="armgart">
+                <p class="textblock">Der Rundgang Armgartstraße ist voraussichtlichfür Ende Januar 2021 geplant. Wir freuen uns sehr, euch alle dort zu treffen.</p>
+                <p class="textblock"><a href="">Erinner' mich dran!</a></p>   
             </div>
             
-            <div class="randomcolor" id="footer">
+            <div id="footer">
                     <div class="footer-link"><a href="#">^</a></div>
                     <div class="footer-link"><a href="">Impressum & Datenschutz</a></div>
                     <div class="footer-link"><a href="">Instagram</a></div>
                     <div class="footer-link"><a href="">Facebook</a></div>
+                    <div class="footer-link">
+                        <a class="smicon" target="_blank" href="https://design.haw-hamburg.de/home/das-department-design/">
+                        <img class="footerlogo" src="resources/haw-logo.svg" alt="HAW Hamburg"></a></div>
                 </div>
 
         </div>
@@ -355,14 +365,22 @@
                     }
                   });
                 
+                /* SLIDER für Galerien Expand*/
+                $( ".galeriecatg" ).click(function() {
+                  $( ".swiper-container" ).slideToggle( "slow", function() {
+                    // Animation complete.
+                  });
+                });
+                
                 
                 //SCROLL LISTENER
+                /*
                 $(window).scroll(function() {
                    if($(window).scrollTop() + $(window).height() == $(document).height()) {
                        alert("bottom!");
                    }
                 });
-                
+                */
             });
         
 
