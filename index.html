@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Rundgang Finkenau 2020</title>
         <meta name="description" content="Rundgang Finkenau - Sommer 2020">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="resources/style.css">
         <link rel="icon" type="image/x-icon" href="resources/favicon.ico">
         <style class="__css_exfil_protection_filtered_styles"></style>
@@ -29,7 +30,7 @@
 
             <div id="landingcanvas">
                 <div class="footer-link" style="margin:0.25em;position:absolute;top:0;right:0;font-size:4em;">
-                        <a class="smicon" target="_blank" href="https://design.haw-hamburg.de/home/das-department-design/">
+                        <a target="_blank" href="https://design.haw-hamburg.de/home/das-department-design/">
                         <img class="footerlogo" src="resources/haw-logo.svg" alt="HAW Hamburg"></a>
                 </div>
                 <!--
@@ -98,11 +99,6 @@
                 </div>
             </div>
             
-            <!--
-            <div class="content-block">
-                <p class="grosstext spacer">Mit Blick auf eine aktuell schwer planbare Zukunft fragen Studierende aus dem Kommunikationsdesign der HAW Hamburg nach der praktischen Rolle von Design.</p>
-            </div>
-            -->
             
             <div class="section paddingless" id="fotocarousel">
                 
@@ -202,9 +198,9 @@
             </div>
             
             <div id="footer">
-                    <div class="footer-link"><a href="">Impressum & Datenschutz</a></div>
-                    <div class="footer-link"><a href="">Instagram</a></div>
-                    <div class="footer-link"><a href="">Facebook</a></div>
+                    <div class="footer-link"><a href="impressum.html">Impressum & Datenschutz</a></div>
+                    <div class="footer-link"><a href="https://www.instagram.com/haw_dmi/">Instagram</a></div>
+                    <div class="footer-link"><a href="https://www.facebook.com/HAW.DMI">Facebook</a></div>
                 <!--
                     <div class="footer-link">
                         <a class="smicon" target="_blank" href="https://design.haw-hamburg.de/home/das-department-design/">
@@ -600,7 +596,7 @@
             ctx.clearRect(0, 0, width, height);
 
             while (balls.length < wordCount) {
-                for (i = 0; i < words.length; i++) {
+                for (i = 0; i < wordCount; i++) {
                     var ball = new Ball(i);
                     balls.push(ball);
                 }
@@ -614,23 +610,26 @@
             // this is shitty, but works mostly
             window.onscroll = function() {scrollFunction()};
             function scrollFunction() {
+                
               if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
                   for (i = 0;i+100<fontSize;i++) {
                       fontSize -= 1;
                       
-                      for (i=0;i<balls.length;i++){
-                          balls[i].textWidth = balls[i].textWidth * 0.95
+                      for (i=0;i<wordCount;i++){
+                          balls[i].textWidth = balls[i].textWidth * 0.98
                       }
                   }
-              } else {
+              } else if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
                 for (i = 0;i+fontSize<450;i++) {
                       fontSize += 1;
                     
-                    for (i=0;i<balls.length;i++){
+                    for (i=0;i<wordCount;i++){
                           balls[i].textWidth = balls[i].defaultTextWidth;
                       }
                 }
               }
+                
+                
             }
 
             requestAnimationFrame(loop);
