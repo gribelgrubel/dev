@@ -111,7 +111,7 @@
                 <h2 class="marginchilds galeriecatg blue">↓ Stadtrundgang</h2>
                 
                 <!-- Slider main container -->
-                <div class="swiper-container" style="display:none"> <!-- hide !-->
+                <div class="swiper-container">
                     <!-- Additional required wrapper -->
                     <div class="swiper-wrapper">
                         <!-- Slides -->
@@ -155,9 +155,9 @@
                 -->
             </div>
             
-            <div class="section content-block bordered" id="team">
+            <div class="section content-block" id="team">
                 
-                <h1 class="marginless green">Team</h1>
+                <h1 class="marginless green bordered">Team</h1>
                 <div class="content_text">
                     <p>Das Erscheinungsbild des Rundgang Finkenau 2020 wurde von Studierenden des Studiengang Kommunikationsdesign an der Fakultät DMI der HAW Hamburg unter der Leitung von Paul Rutrecht und Hendrike Schmietendorf gestaltet: Frederik Engelbrecht, Georg Randel, Janna Thaden, Laura Dunse, Mert Ekinci, Rebecca Söhlke.</p>
                     <table id="teamtable">
@@ -377,11 +377,23 @@
                   });
                 
                 /* SLIDER für Galerien Expand*/
+                
+                /*
+                $( ".galeriecatg" ).each(function() {
+                    // child of this galeriecatg slides in/out
+                    $(this ".coming-soon" ).slideToggle( "slow", function() {
+                    // Animation complete.
+                  });
+                }
+                */
+
+                
                 $( ".galeriecatg" ).click(function() {
                   $( ".swiper-container" ).slideToggle( "slow", function() {
                     // Animation complete.
                   });
                 });
+                
                 
                 $( "#clicktest" ).click(function() {
                   $( ".coming-soon" ).slideToggle( "slow", function() {
