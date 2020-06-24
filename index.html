@@ -152,7 +152,7 @@
             
             <div class="section content-block spacer-top" id="armgart">
                 <h1 class="green bordered">Ausblick</h1>
-                <p class="textblock">Wir freuen uns darauf, euch auf dem Rundgang Armgartstraße Anfang 2021 wieder alle dort zu treffen. Sobald ein genauerer Termin feststeht, informieren wir euch hier!</p>
+                <p class="textblock">Wir freuen uns darauf, euch auf dem Rundgang Armgartstraße Anfang 2021 wieder alle dort zu treffen. Sobald ein genauerer Termin feststeht, informieren wir euch hier und über die sozialen Medien!</p>
                 <!-- <p class="textblock"><a href="">Erinner' mich dran, sobald es ein Datum gibt!</a></p>   -->
                 <div id="backtotop"><a href="#">↑</a></div>
             </div>
@@ -177,9 +177,7 @@
         <!-- load swiper -->
         <script src="resources/swiper.min.js"></script>
         <!-- initialized in jQuery when document ready -->
-        
-    </body>
-    
+
     <!-- ScrollReveal doesnt work with FullPage; hook the smooth reveal into scrollpage -->
     <!--
     <script src="https://unpkg.com/scrollreveal"></script>
@@ -189,184 +187,106 @@
     -->
     
     <script>
-        
-            $(document).ready(function () {
-                                
-                var colors = ["rgb(231,95,42)", "rgb(185,184,184)", "rgb(90,220,129)", "rgb(245,255,42)", "rgb(174,54,248)", "rgb(0,65,236)"];
-                
-                //Zufallsfunktion Farbe
-                $('.randomcolor').each( function(){
-                    var number = 1 + Math.floor(Math.random() * 5);
-                    $(this).attr("style","color:"+colors[number]);
-                });
-                
-                //Zufallsfunktion Fotoposition
-                $('.randompos').each( function(){
-                    var divWidth = $(this).outerHeight();
-                    var divHeight = $(this).outerWidth();
-                    $(this).attr("style","left:"+(Math.random() * ($(window).width() - divWidth)).toFixed()+"px; top:"+(Math.random() * ($(window).height() - divHeight)).toFixed()+"px");
-                });
+        $(document).ready(function() {
 
-                //SWIPER
-                //initialize swiper when document ready
-                var mySwiper = new Swiper ('.swiper-container', {
-                    // Optional parameters
-                    direction: 'horizontal',
-                    loop: false,
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                    centeredSlides: true,
-                    centerInsufficientSlides: true,
-                    autoHeight: true,
+            var colors = ["rgb(231,95,42)", "rgb(185,184,184)", "rgb(90,220,129)", "rgb(245,255,42)", "rgb(174,54,248)", "rgb(0,65,236)"];
 
-                    // Navigation arrows
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
+            //Zufallsfunktion Farbe
+            $('.randomcolor').each(function() {
+                var number = 1 + Math.floor(Math.random() * 5);
+                $(this).attr("style", "color:" + colors[number]);
+            });
 
-                    // add these together with mobile css!
-                    breakpoints: {
+            //Zufallsfunktion Fotoposition
+            $('.randompos').each(function() {
+                var divWidth = $(this).outerHeight();
+                var divHeight = $(this).outerWidth();
+                $(this).attr("style", "left:" + (Math.random() * ($(window).width() - divWidth)).toFixed() + "px; top:" + (Math.random() * ($(window).height() - divHeight)).toFixed() + "px");
+            });
+
+            //SWIPER
+            //initialize swiper when document ready
+            var mySwiper = new Swiper('.swiper-container', {
+                // Optional parameters
+                direction: 'horizontal',
+                loop: false,
+                slidesPerView: 2,
+                spaceBetween: 20,
+                centeredSlides: true,
+                centerInsufficientSlides: true,
+                autoHeight: true,
+
+                // Navigation arrows
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+
+                // add these together with mobile css!
+                breakpoints: {
                     // when window width is >= 320px
                     800: {
-                    slidesPerView: 1,
-                    spaceBetween: 10
+                        slidesPerView: 1,
+                        spaceBetween: 10
                     },
-                    }
-                    /*
-                    //aspect ratio width/height of >=0.75
-                    '@0.75': {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                    },
-                    }
-                    */
-                    
-                    /* BETTER instead of having multiple loading sliders: https://swiperjs.com/api/#virtual */
-                });
-                
-                
-                /* instantly collapse sliders at start! */
-                $( ".swiper-container" ).each(function() {
-                    $(this).slideToggle( 0, function() {});
-                });
-
-                /* SLIDER für Galerien Expand*/
-                
-                
-                $( ".galeriecatg" ).each(function() {
-                    // child of this galeriecatg slides in/out
-                    $(this).click(function() {
-                        
-                        // do this with slideUp() and slideDown() to return to start and stuff
-                        $(this).find(".swiper-container").slideToggle( "slow", function() {
-                            // Animation complete.
-                            mySwiper.slideNext(300);    
-                            //mySwiper.slideTo(0, 300);
-                        });
-                    })
-                });
-                
-                $( ".galeriecatg" ).each(function() {
-                    // child of this galeriecatg slides in/out
-                    $(this).click(function() {
-                        
-                        // do this with slideUp() and slideDown() to return to start and stuff
-                        $(this).find(".coming-soon").slideToggle( "slow", function() {
-                            // Animation complete.
-                        });
-                    })
-                });
-                
-                
-                //SCROLL LISTENER
+                }
                 /*
-                $(window).scroll(function() {
-                   if($(window).scrollTop() + $(window).height() == $(document).height()) {
-                       alert("bottom!");
-                   }
-                });
+                //aspect ratio width/height of >=0.75
+                '@0.75': {
+                slidesPerView: 2,
+                spaceBetween: 20,
+                },
+                }
                 */
-            });
-        
 
+                /* BETTER instead of having multiple loading sliders: https://swiperjs.com/api/#virtual */
+            });
+
+
+            /* instantly collapse sliders at start! */
+            $(".swiper-container").each(function() {
+                $(this).slideToggle(0, function() {});
+            });
+
+            /* SLIDER für Galerien Expand*/
+
+
+            $(".galeriecatg").each(function() {
+                // child of this galeriecatg slides in/out
+                $(this).click(function() {
+
+                    // do this with slideUp() and slideDown() to return to start and stuff
+                    $(this).find(".swiper-container").slideToggle("slow", function() {
+                        // Animation complete.
+                        mySwiper.slideNext(300);
+                        //mySwiper.slideTo(0, 300);
+                    });
+                })
+            });
+
+            $(".galeriecatg").each(function() {
+                // child of this galeriecatg slides in/out
+                $(this).click(function() {
+
+                    // do this with slideUp() and slideDown() to return to start and stuff
+                    $(this).find(".coming-soon").slideToggle("slow", function() {
+                        // Animation complete.
+                    });
+                })
+            });
+
+
+            //SCROLL LISTENER
+            /*
+            $(window).scroll(function() {
+               if($(window).scrollTop() + $(window).height() == $(document).height()) {
+                   alert("bottom!");
+               }
+            });
+            */
+        });
     </script>
     
-    <!-- animCanvas to move the objects -->
-    <!--
-    <script>
-        var canvas = document.getElementById("animCanvas");
-        var ctx = canvas.getContext("2d");
-        var ballRadius = 20;
-        var x = canvas.width/2; // starting point & position
-        var y = canvas.height-30;   //starting point & stored position
-        var dx = 2; //speed
-        var dy = -2;    //speed
-        
-        var words = ["the", "end(s)", "of", "the", "world", "?"];
-        var wordCount = words.length;
-        var wordsX = [];
-        var wordsY = [];
-        var fontSize; //this has to be dynamic based on screen dimensions
-
-        function drawBall() {
-            
-            for (var i = 0; i < wordCount; i++) {
-                var localX = canvas.width/2;
-                var localY = canvas.height-30;
-                
-                ctx.font = "60px PX Grotesk"
-                ctx.fillText(words[i],x,y);
-            }
-            
-            
-            /*
-            ctx.beginPath();
-            ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-            ctx.fillStyle = "#0095DD";
-            ctx.fill();
-            ctx.closePath();
-            */
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.canvas.width  = window.innerWidth;
-            ctx.canvas.height = window.innerHeight;
-            drawBall();
-            
-            for (var i = 0; i < wordCount; i++) {
-                
-                if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-                dx = -dx;
-                }
-                if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
-                    dy = -dy;
-                }
-
-                x += dx;
-                y += dy;
-            }
-
-
-            // old code for single element
-            if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-                dx = -dx;
-            }
-            if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
-                dy = -dy;
-            }
-
-            x += dx;
-            y += dy;
-            
-            requestAnimationFrame(draw);
-        }
-        
-        draw();
-
-    </script>
--->
     
     <!-- bouncing balls 2 -->
     <!-- from https://www.html5canvastutorials.com/advanced/html5-canvas-bouncing-balls/ -->
@@ -376,12 +296,26 @@
 
         var width = canvas.width = window.innerWidth;
         var height = canvas.height = window.innerHeight;
+        var delay = 200;   //delay between words coming onto screen
 
         var colors = ["rgb(245,255,42)", "rgb(185,184,184)", "rgb(90,220,129)", "rgb(174,54,248)", "rgb(231,95,42)", "rgb(0,65,236)"];
         var words = ["the", "end(s)", "of", "the", "world", "?"];
         var wordCount = words.length;
         var word;
-        var fontSize = 450; //this has to be dynamic based on screen dimensions
+        var fontSize; //this is dynamic based on screen dimensions, filled in resizeCanvas()
+        var minFontSize;    // the smallest the font should be, based on fontSize
+        var maxFontSize;
+        if (window.screen.width * window.devicePixelRatio > window.screen.height * window.devicePixelRatio) {
+                console.log("width is bigger");
+                fontSize = height / 2;
+                minFontSize = fontSize / 4;
+                maxFontSize = fontSize;
+            } else {
+                console.log("height is bigger");
+                fontSize = width / 3;
+                minFontSize = fontSize / 3;
+                maxFontSize = fontSize;
+            }
         var fontStyle = "normal"; // normal or oblique, alternating on edgecollision
         var fontCase = 0; // 0: normal, 1: oblique
         
@@ -396,15 +330,16 @@
         }
 
         function Ball(identifier) {
-            this.x = random(0, width/4);  //was 0, width; this spawns them only the first screen quarter, so no long word gets stuck
+            this.x = random(0, -width/2);  //was 0, width; this spawns them only the first screen quarter, so no long word gets stuck
             this.y = random(0+fontSize, height); //was 0, height; but this makes thigns get stuck
             // move all things in from one side and out from another? this might help with creating intro & outro states
-            this.velX = random(-7, 7);
+            this.velX = random(2, 7);  //was -7,7; now only positive to make things slide in from beyond the left canvas border
             this.velY = random(-7, 7);
             // when -1 < velocity < 1 
             this.color = colors[identifier];
             this.size = 1; //lower left edge, only for dev purposes
             this.word = words[identifier];
+            this.index = identifier;
             
             //getTextWidth(this);   //cant return valid values
             //draw text once to get correct textWidth
@@ -412,7 +347,11 @@
             ctx.fillText(this.word, this.x, this.y);
             this.textWidth = ctx.measureText(this.word).width;
             this.defaultTextWidth = this.textWidth;
-            console.log("Word width: "+this.textWidth)
+            this.x = -this.textWidth*1.3;
+            //console.log("Word width: "+this.textWidth)
+            
+            this.introState = true; // true when spawning for as long as the word is outside the canvas bounds, to prevent getting stuck in velocity switching
+            this.timeCount = 0;  //counting up to delay;
         }
 
         Ball.prototype.draw = function() {
@@ -433,10 +372,12 @@
             if ((this.x + this.textWidth) >= width) {
                 this.velX = -(this.velX);
             }
-
+            
             // compare left wordedge and left screenborder
-            if ((this.x/* - this.textWidth*/) <= 0) {
+            if ((this.x/* - this.textWidth*/) <= 0 && this.introState==false) {
                 this.velX = -(this.velX);
+            } else if (this.x > 2){
+                this.introState = false
             }
 
             // compare font baseline with bottom screenedge
@@ -449,8 +390,13 @@
                 this.velY = -(this.velY);
             }
 
-            this.x += this.velX;
-            this.y += this.velY;
+            if (this.timeCount >= delay * this.index+1) {
+                this.x += this.velX;
+                this.y += this.velY;
+            } else {
+                this.timeCount++;
+                console.log("timeCount: "+this.timeCount+ "; index: "+this.index);
+            }
             
             /*
             if(scroll>0.1){
@@ -512,15 +458,15 @@
             function scrollFunction() {
                 
               if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-                  for (i = 0;i+100<fontSize;i++) {
+                  for (i = 0;i+minFontSize<fontSize;i++) {
                       fontSize -= 1;
                       
                       for (i=0;i<wordCount;i++){
                           balls[i].textWidth = balls[i].textWidth * 0.98
                       }
                   }
-              } else if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-                for (i = 0;i+fontSize<450;i++) {
+              } else if (document.body.scrollTop < 80 || document.documentElement.scrollTop < 80) {
+                for (i = 0;i+fontSize<maxFontSize;i++) {
                       fontSize += 1;
                     
                     for (i=0;i<wordCount;i++){
@@ -536,10 +482,38 @@
         }
         
         loop();
+        
+        initialize();
+        
+        function initialize() {
+           // Register an event listener to call the resizeCanvas() function 
+           // each time the window is resized.
+           window.addEventListener('resize', resizeCanvas, false);
+           // Draw canvas border for the first time.
+           resizeCanvas();
+        }
+        
+        // Runs each time the DOM window resize event fires.
+        // Resets the canvas dimensions to match window,
+        // then draws the new borders accordingly.
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            
+            if (window.screen.width * window.devicePixelRatio > window.screen.height * window.devicePixelRatio) {
+                console.log("width is bigger");
+                fontSize = height / 2;
+                minFontSize = fontSize / 4;
+            } else {
+                console.log("height is bigger");
+                fontSize = width / 2;
+                minFontSize = fontSize / 4;
+            }
+        }
              
         
     </script>
 	
-
+</body>
 
 </html>

@@ -240,21 +240,7 @@
         function fontStyleChange() {
         
         }
-        
-        /*
-        //broken, doesnt seem to be able to paint on canvas to get width
-        function getTextWidth(object) {
-            var newTextWidth;
-            var test = "woah!";
-            ctx.font = fontStyle + " " + fontSize + "px PX Grotesk";
-            ctx.fillText(object.word, object.x, object.y);
-            object.textWidth = ctx.measureText(object.word).width; //gives correct values, but makes text jitter vertically
-            //return newTextWidth;
-            return test;
-        }
-        */
-
-        
+                
         function loop() {
             ctx.clearRect(0, 0, width, height);
 
@@ -282,7 +268,7 @@
                           balls[i].textWidth = balls[i].textWidth * 0.98
                       }
                   }
-              } else if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+              } else if (document.body.scrollTop < 80 || document.documentElement.scrollTop < 80) {
                 for (i = 0;i+fontSize<450;i++) {
                       fontSize += 1;
                     
