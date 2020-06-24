@@ -66,21 +66,20 @@
                 
                 <div class="galeriecatg marginchild">
                     <h2 class="blue">↓ Stadtrundgang</h2>
-                    <!-- Slider main container -->
+                    <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
+                    <!--
                     <div class="swiper-container">
-                        <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
-                            <!-- Slides -->
                             <div class="swiper-slide"></div>
                             <div class="swiper-slide"><img src="img/litfass.png" class=foto></div>
                             <div class="swiper-slide"><img src="img/billboard.png" class=foto></div>
                             <div class="swiper-slide"><img src="img/litfass.png" class=foto></div>
                             <div class="swiper-slide"><img src="img/subway-ad.png" class=foto></div>
                         </div>
-                        <!-- navigation buttons -->
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
                     </div>
+                    -->
                 </div>
                 
                 <div class="galeriecatg marginchild">
@@ -300,6 +299,7 @@
 
         var colors = ["rgb(245,255,42)", "rgb(185,184,184)", "rgb(90,220,129)", "rgb(174,54,248)", "rgb(231,95,42)", "rgb(0,65,236)"];
         var words = ["the", "end(s)", "of", "the", "world", "?"];
+        var state = 0;  //0 ends; 1 galerie; 2 team; 3 see you soon;
         var wordCount = words.length;
         var word;
         var fontSize; //this is dynamic based on screen dimensions, filled in resizeCanvas()
@@ -308,14 +308,14 @@
         var maxFontSize;
         if (window.screen.width * window.devicePixelRatio > window.screen.height * window.devicePixelRatio) {
                 console.log("width is bigger");
-                fontSize = height / 2;
-                minFontSize = fontSize / 4;
-                maxFontSize = fontSize;
+                fontSize = Math.round(height / 2);
+                minFontSize = Math.round(fontSize / 4);
+                maxFontSize = Math.round(fontSize);
             } else {
                 console.log("height is bigger");
-                fontSize = width / 3;
-                minFontSize = fontSize / 3;
-                maxFontSize = fontSize;
+                fontSize = Math.round(width / 3);
+                minFontSize = Math.round(fontSize / 3);
+                maxFontSize = Math.round(fontSize);
             }
         var fontStyle = "normal"; // normal or oblique, alternating on edgecollision
         var fontCase = 0; // 0: normal, 1: oblique
@@ -341,14 +341,15 @@
             this.size = 1; //lower left edge, only for dev purposes
             this.word = words[identifier];
             this.index = identifier;
+            this.fontStyle = "normal";
             
             //getTextWidth(this);   //cant return valid values
             //draw text once to get correct textWidth
-            ctx.font = fontStyle + " " + fontSize + "px PX Grotesk";
+            ctx.font = this.fontStyle + " " + fontSize + "px PX Grotesk";
             ctx.fillText(this.word, this.x, this.y);
             this.textWidth = ctx.measureText(this.word).width;
             this.defaultTextWidth = this.textWidth;
-            this.x = -this.textWidth*1.5;
+            this.x = -this.textWidth*1.5;   //spawn point based on final textWidth value
             //console.log("Word width: "+this.textWidth)
             
             this.introState = true; // true when spawning for as long as the word is outside the canvas bounds, to prevent getting stuck in velocity switching
@@ -361,7 +362,7 @@
             ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI); //text origin: bottom left corner (canvas gets drawn from top left)
             //ctx.rect(this.x, this.y - fontSize, this.x+this.textWidth, this.y); //object boundaries
             ctx.fill();
-            ctx.font = fontStyle + " " + fontSize + "px PX Grotesk";
+            ctx.font = this.fontStyle + " " + fontSize + "px PX Grotesk";
             ctx.fillText(this.word, this.x, this.y);
             ctx.strokeStyle = 'black';
             ctx.lineWidth = 2;
@@ -372,11 +373,14 @@
             //compare right wordedge and right screenborder
             if ((this.x + this.textWidth) >= width) {
                 this.velX = -(this.velX);
+                this.velY = this.velY + random(-1,1);   //some randomness for the y-axis
+                this.fontStyle = fontStyleChange(this);
             }
             
             // compare left wordedge and left screenborder
             if ((this.x/* - this.textWidth*/) <= 0 && this.introState==false) {
                 this.velX = -(this.velX);
+                this.fontStyle = fontStyleChange(this);
             } else if (this.x > 2){
                 this.introState = false
             }
@@ -384,11 +388,13 @@
             // compare font baseline with bottom screenedge
             if ((this.y + this.size) >= height) {
                 this.velY = -(this.velY);
+                this.fontStyle = fontStyleChange(this);
             }
 
             // compare font height with top screenedge; font boundaries are larger than visuals, so reduce a bit
             if ((this.y - (fontSize/1.5)) <= 0) {
                 this.velY = -(this.velY);
+                this.fontStyle = fontStyleChange(this);
             }
 
             if (this.timeCount >= delay * this.index+1) {
@@ -399,15 +405,12 @@
                 //console.log("timeCount: "+this.timeCount+ "; index: "+this.index);
             }
             
-            
             if (fontSize > targetFontSize) {
                 fontSize--;
-                console.log("shrinking");
             }  else if (fontSize == targetFontSize) {
                 targetFontSize = fontSize;
             }  else if (fontSize < targetFontSize) {
                 fontSize++;
-                console.log("growing");
             }
             
             /*
@@ -431,9 +434,15 @@
             }
         }
 
-        
-        function fontStyleChange() {
-        
+        // called after velocity inversion (edge detection), gets objects font style and inverts it
+        function fontStyleChange(object) {
+            var textStyle = object.fontStyle;
+            if (textStyle == "normal") {
+                textStyle = "oblique";
+            } else {
+                textStyle = "normal";
+            }
+            return textStyle;
         }
         
         /*
@@ -479,7 +488,7 @@
                       }
                       */
                   
-              } else if (document.body.scrollTop < 80 || document.documentElement.scrollTop < 80) {
+              } else if (document.body.scrollTop < 81 || document.documentElement.scrollTop < 81) {
 
                       targetFontSize = maxFontSize;
                     /*
@@ -517,12 +526,12 @@
             
             if (window.screen.width * window.devicePixelRatio > window.screen.height * window.devicePixelRatio) {
                 console.log("width is bigger");
-                fontSize = height / 2;
-                minFontSize = fontSize / 4;
+                fontSize = Math.round(height / 2);
+                minFontSize = Math.round(fontSize / 4);
             } else {
                 console.log("height is bigger");
-                fontSize = width / 2;
-                minFontSize = fontSize / 4;
+                fontSize = Math.round(width / 2);
+                minFontSize = Math.round(fontSize / 4);
             }
         }
              
