@@ -90,7 +90,7 @@
             <div class="section paddingless" id="fotocarousel">
                                 
                 <div class="galeriecatg marginchild">
-                    <h2 class="blue">↓ Stadtrundgang</h2>
+                    <h2 class="blue"><span class="dropIcon">↓</span> Stadtrundgang</h2>
                     <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
                     <!--
                     <div class="swiper-container">
@@ -108,12 +108,12 @@
                 </div>
                 
                 <div class="galeriecatg marginchild">
-                    <h2 class="green">↓ Social Media</h2>
+                    <h2 class="green"><span class="dropIcon">↓</span> Social Media</h2>
                     <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
                 </div>
                 
                 <div class="galeriecatg marginchild">
-                    <h2 class="grey">↓ Rundgang 2019/20</h2>
+                    <h2 class="grey"><span class="dropIcon">↓</span> Rundgang 2019/20</h2>
                     <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
                 </div>
                                 
@@ -191,7 +191,7 @@
                         <img class="footerlogo" src="resources/haw-logo.svg" alt="HAW Hamburg"></a>
                     </div>
                 </div>
--->
+                -->
 
         </div>
         
@@ -296,10 +296,10 @@
                     $(this).find(".coming-soon").slideToggle("slow", function() {
                         // Animation complete.
                     });
+                    $(this).find(".dropIcon").toggleClass("rotate-180");
                 })
             });
-
-
+            
             //SCROLL LISTENER
             /*
             $(window).scroll(function() {
