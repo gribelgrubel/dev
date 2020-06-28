@@ -363,7 +363,6 @@ h3{
     table * { display:block !important; padding:0;/*max-width:100%*/ }
     #footer, .footer-link{
         display:block;
-        width: 100%;
     }
 }
 
