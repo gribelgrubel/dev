@@ -211,11 +211,12 @@
     <script>
         $(document).ready(function() {
 
-            var colors = ["rgb(231,95,42)", "rgb(185,184,184)", "rgb(90,220,129)", "rgb(245,255,42)", "rgb(174,54,248)", "rgb(0,65,236)"];
+            var colors = ["rgb(231,95,42)", "rgb(185,184,184)", "rgb(90,220,129)", "rgb(245,255,42)", "rgb(174,54,248)", "rgb(0,65,236)", "rgb(0,117,191)"];  //orange, grey, green, yellow, lila, darkblue, sandmatsch, flieder, lightblue
 
             //Zufallsfunktion Farbe
             $('.randomcolor').each(function() {
-                var number = 1 + Math.floor(Math.random() * 5);
+                var colorCount = colors.length;
+                var number = 0 + Math.floor(Math.random() * colorCount);
                 $(this).attr("style", "color:" + colors[number]);
             });
 

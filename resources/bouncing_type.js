@@ -22,14 +22,14 @@ $(document).ready(function () {
     var maxFontSize;
     var letterSpacing = 0.85;
     var letterEasing = 0.05; //amount of easing when letters jump to new positions on edgeCollision
-    var minLineWidth = 1.5;
-    var maxLineWidth = 4.0;
+    var minLineWidth = height/500;  //was 1.5 for 1920x1080res
+    var maxLineWidth = height/220; //was 4.0
     if (window.screen.width * window.devicePixelRatio > window.screen.height * window.devicePixelRatio) { //initialization, larger width
         fontSize = Math.round(height / 2);
         minFontSize = Math.round(fontSize / 4);
         maxFontSize = Math.round(fontSize);
-        minLineWidth = height/250;
-        maxLineWidth = height/150;
+        minLineWidth = height/500;
+        maxLineWidth = height/220;
     } else {    //initialization for canvas larger height
         fontSize = Math.round(width / 3.5);
         minFontSize = Math.round(fontSize / 3);
@@ -111,13 +111,14 @@ $(document).ready(function () {
     }
 
     function letterPosChange(object) {
+        var valueClamp = 2; //random num gets pulled from -valueClamp to valueClamlp range
         var letterCount = object.letters.length;
         var fontSizeMult = (fontSize * verticalOffsetMult) * 0.1; //scaling factor to account for min-max fontSize
         for (q = 0; q < letterCount; q++) {
             var currLett = object.letters[q];
             // rounding to integers prevents inprecise vis and makes the animation look smooth!
-            currLett.newY = Math.round(random(-5 * fontSizeMult, 5 * fontSizeMult));
-            currLett.newX = Math.round(random(-2 * fontSizeMult, 2 * fontSizeMult)); //slightly smaller valuespace to keep readable
+            currLett.newY = Math.round(random(-valueClamp * fontSizeMult, valueClamp * fontSizeMult));
+            currLett.newX = Math.round(random(-valueClamp/2 * fontSizeMult, valueClamp/2 * fontSizeMult)); //slightly smaller valuespace to keep readable
         }
     }
 
@@ -195,7 +196,7 @@ $(document).ready(function () {
         this.y = random(0 + fontSize, height); //was 0, height; but this makes thigns get stuck
         // move all things in from one side and out from another? this might help with creating intro & outro states
         this.velX = random(3, 3); //was -7,7; now only positive to make things slide in from beyond the left canvas border
-        this.velY = random(-3, 3);
+        this.velY = random(-2, 2);
         // edge case 2 do: if (-1 < velocity < 1 )
         this.color = colors[identifier];
         this.size = 1; //lower left edge, only for dev purposes
@@ -396,7 +397,7 @@ $(document).ready(function () {
 
         // compare font baseline with bottom screenedge
         if ((this.y + this.size) >= height) {
-            this.velY = -(this.velY);
+            this.velY = -(Math.abs(this.velY));
             this.fontStyle = fontStyleChange(this);
             letterPosChange(this);
         }
@@ -576,8 +577,8 @@ $(document).ready(function () {
             //console.log("width is bigger");
             fontSize = Math.round(height / 2);
             minFontSize = Math.round(fontSize / 4);
-            minLineWidth = height/250;
-            maxLineWidth = height/150;
+            minLineWidth = height/500;
+            maxLineWidth = height/220;
         } else {
             //console.log("height is bigger");
             fontSize = Math.round(width / 2);
