@@ -22,21 +22,26 @@ $(document).ready(function () {
     var maxFontSize;
     var letterSpacing = 0.85;
     var letterEasing = 0.05; //amount of easing when letters jump to new positions on edgeCollision
-    if (window.screen.width * window.devicePixelRatio > window.screen.height * window.devicePixelRatio) { //initial size
+    var minLineWidth = 1.5;
+    var maxLineWidth = 4.0;
+    if (window.screen.width * window.devicePixelRatio > window.screen.height * window.devicePixelRatio) { //initialization, larger width
         fontSize = Math.round(height / 2);
         minFontSize = Math.round(fontSize / 4);
         maxFontSize = Math.round(fontSize);
-    } else {
-        fontSize = Math.round(width / 3);
+        minLineWidth = height/250;
+        maxLineWidth = height/150;
+    } else {    //initialization for canvas larger height
+        fontSize = Math.round(width / 3.5);
         minFontSize = Math.round(fontSize / 3);
         maxFontSize = Math.round(fontSize);
+        minLineWidth = height/400;
+        maxLineWidth = height/250;
     }
+    console.log("minLineWidth: "+minLineWidth+" maxLineWidth: "+maxLineWidth);
     var verticalOffsetMult = minFontSize / maxFontSize; // used for letter y-offset when scaling
     var fontStyle = "normal"; // normal or oblique, alternating on edgecollision
     ctx.font = "normal " + fontSize + "px PX Grotesk";
     ctx.strokeStyle = "black";
-    var minLineWidth = 1.5;
-    var maxLineWidth = 4.0;
     var lineWidth = maxLineWidth;
     var targetLineWidth = maxLineWidth;
     var scroll; //gets scroll distance from top
@@ -202,7 +207,7 @@ $(document).ready(function () {
         this.minTextWidth = Math.round(getMinTextWidth(this));
         this.maxTextWidth = Math.round(getMaxTextWidth(this));
 
-        this.x = -this.textWidth * 1.5; //REAL spawn point outside of canvas based on final textWidth value
+        this.x = -this.textWidth * 2; //REAL spawn point outside of canvas based on final textWidth value
 
         this.introState = true; // true when spawning for as long as the word is outside the canvas bounds, to prevent getting stuck in velocity switching
         this.timeCount = 0; //counting up to delay;
@@ -257,7 +262,7 @@ $(document).ready(function () {
     // this has to be nested inside the Ball constructor
     function Letter(character, /*color,*/ localFontStyle) {
         this.x = 0; //relative to parent container origin: origin + this.margin + this.width
-        this.y = random(-40, 40); //relative to parent container origin: origin + this.margin + this.height
+        this.y = 0; //random(-40, 40); //relative to parent container origin: origin + this.margin + this.height
         this.newX = this.x;
         this.newY = this.y;
         this.origY = this.y;
@@ -571,10 +576,14 @@ $(document).ready(function () {
             //console.log("width is bigger");
             fontSize = Math.round(height / 2);
             minFontSize = Math.round(fontSize / 4);
+            minLineWidth = height/250;
+            maxLineWidth = height/150;
         } else {
             //console.log("height is bigger");
             fontSize = Math.round(width / 2);
             minFontSize = Math.round(fontSize / 4);
+            minLineWidth = height/400;
+            maxLineWidth = height/250;
         }
     }
 
