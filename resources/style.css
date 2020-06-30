@@ -66,11 +66,12 @@ body {
 
 /* HTML Stylings */
 a{color:orange !important;}
-a, .galeriecatg h2, #backtotop{
+
+a, .galeriecatg h2, #backtotop {
     text-decoration:none;
     color:orange;
     -webkit-text-stroke: 1px black; /* not fully supported, add solution with 4 text-shadows! */
-    cursor:url("cursor_click.ico"),pointer;
+    cursor:url("cursor_click.ico"),pointer !important;
 }
 
 a:visited{color:inherit}
@@ -247,6 +248,15 @@ h3{
     vertical-align: bottom;
 }
 
+.swiper-slide-active img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    max-height:80vh;
+    width:auto;
+}
+
 /* Dropdown Icon */
 .dropIcon{
     -moz-transition: transform 0.25s;
@@ -343,10 +353,12 @@ h3{
 .footer-link a{
     -webkit-text-stroke: 0;
     color:black !important;
+    cursor:url("cursor_click.ico"),pointer !important;
 }
 
 .footerlogo{
     height:1em;
+    cursor:url("cursor_click.ico"),pointer !important;
 }
 
 .title-linebreak{display:none;}
