@@ -20,7 +20,7 @@ $(document).ready(function () {
     var targetFontSize; // the value to grow/shrink fontSize to
     var minFontSize; // the smallest the font should be, based on fontSize
     var maxFontSize;
-    var letterSpacing = 0.85;
+    var letterSpacing = 0.95;   //was 0.85
     var letterEasing = 0.05; //amount of easing when letters jump to new positions on edgeCollision
     var minLineWidth = height/500;  //was 1.5 for 1920x1080res
     var maxLineWidth = height/220; //was 4.0
@@ -116,9 +116,10 @@ $(document).ready(function () {
         var fontSizeMult = (fontSize * verticalOffsetMult) * 0.1; //scaling factor to account for min-max fontSize
         for (q = 0; q < letterCount; q++) {
             var currLett = object.letters[q];
-            // rounding to integers prevents inprecise vis and makes the animation look smooth!
-            currLett.newY = Math.round(random(-valueClamp * fontSizeMult, valueClamp * fontSizeMult));
-            currLett.newX = Math.round(random(-valueClamp/2 * fontSizeMult, valueClamp/2 * fontSizeMult)); //slightly smaller valuespace to keep readable
+            //remove letter moving on eckenditsch, too noisy
+            //currLett.newY = Math.round(random(-valueClamp * fontSizeMult, valueClamp * fontSizeMult));
+            // for x+y values: rounding to integers prevents inprecise vis and makes the animation look smooth!
+            //currLett.newX = Math.round(random(-valueClamp/2 * fontSizeMult, valueClamp/2 * fontSizeMult)); //slightly smaller valuespace to keep readable
         }
     }
 
@@ -196,7 +197,7 @@ $(document).ready(function () {
         this.y = random(0 + fontSize, height); //was 0, height; but this makes thigns get stuck
         // move all things in from one side and out from another? this might help with creating intro & outro states
         this.velX = random(3, 3); //was -7,7; now only positive to make things slide in from beyond the left canvas border
-        this.velY = random(-2, 2);
+        this.velY = random(-1, 1);
         // edge case 2 do: if (-1 < velocity < 1 )
         this.color = colors[identifier];
         this.size = 1; //lower left edge, only for dev purposes
@@ -208,7 +209,7 @@ $(document).ready(function () {
         this.minTextWidth = Math.round(getMinTextWidth(this));
         this.maxTextWidth = Math.round(getMaxTextWidth(this));
 
-        this.x = -this.textWidth * 2; //REAL spawn point outside of canvas based on final textWidth value
+        this.x = -this.textWidth * 1.1; //was textWidth * 2; REAL spawn point outside of canvas based on final textWidth value
 
         this.introState = true; // true when spawning for as long as the word is outside the canvas bounds, to prevent getting stuck in velocity switching
         this.timeCount = 0; //counting up to delay;

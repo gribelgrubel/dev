@@ -93,9 +93,9 @@
             <div class="section paddingless" id="fotocarousel">
                                 
                 <div class="galeriecatg marginchild">
-                    <h2 class="blue"><span class="dropIcon">↓</span> Stadtrundgang</h2>
-                    <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
-                    <!--
+                    <h2 class="blue clickable"><span class="dropIcon">↓</span> Stadtrundgang</h2>
+                    <!--<div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>-->
+                    <!-- below: Galerie, disable again for release as long as no pictures are there -->
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide"></div>
@@ -107,16 +107,16 @@
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
                     </div>
-                    -->
+                    
                 </div>
                 
                 <div class="galeriecatg marginchild">
-                    <h2 class="green"><span class="dropIcon">↓</span> Social Media</h2>
+                    <h2 class="green clickable"><span class="dropIcon">↓</span> Social Media</h2>
                     <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
                 </div>
                 
                 <div class="galeriecatg marginchild">
-                    <h2 class="grey"><span class="dropIcon">↓</span> Rundgang 2019/20</h2>
+                    <h2 class="grey clickable"><span class="dropIcon">↓</span> Rundgang 2019/20</h2>
                     <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
                 </div>
                                 
@@ -274,25 +274,39 @@
             /* SLIDER für Galerien Expand*/
 
 
-            $(".galeriecatg").each(function() {
+            $(".clickable").each(function() {
                 // child of this galeriecatg slides in/out
+                var firstOpen = true;
                 $(this).click(function() {
-
+                    
                     // do this with slideUp() and slideDown() to return to start and stuff
-                    $(this).find(".swiper-container").slideToggle("slow", function() {
+                    //$(this).find(".swiper-container").slideToggle("slow", function() {
+                    $(this).siblings().slideToggle("slow", function() {
                         // Animation complete.
-                        mySwiper.slideNext(300);
+                        //mySwiper.slideNext(300);
                         //mySwiper.slideTo(0, 300);
                     });
+                    if (firstOpen == true) {
+                        console.log("sliding to next");
+                        mySwiper.slideNext(300);
+                        firstOpen = false;
+                        console.log(firstOpen);
+                    } else if (firstOpen == false ) {
+                        console.log("sliding to first");
+                        mySwiper.slideTo(0, 600);
+                        firstOpen = true;
+                        console.log(firstOpen);
+                    }
+                    
                 })
             });
 
-            $(".galeriecatg").each(function() {
+            $(".clickable").each(function() {
                 // child of this galeriecatg slides in/out
                 $(this).click(function() {
 
                     // do this with slideUp() and slideDown() to return to start and stuff
-                    $(this).find(".coming-soon").slideToggle("slow", function() {
+                    $(this).find(".coming-soon").slideToggle("slow", function() { //disabled
                         // Animation complete.
                     });
                     $(this).find(".dropIcon").toggleClass("rotate-180");
