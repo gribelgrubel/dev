@@ -20,7 +20,7 @@ $(document).ready(function () {
     var targetFontSize; // the value to grow/shrink fontSize to
     var minFontSize; // the smallest the font should be, based on fontSize
     var maxFontSize;
-    var letterSpacing = 0.85;   //was 0.85
+    var letterSpacing = 0.65;   //was 0.85 - now narrower to account for some ausgleich with letterspacing per letterstyle
     var letterEasing = 0.05; //amount of easing when letters jump to new positions on edgeCollision
     var minLineWidth = height/500;  //was 1.5 for 1920x1080res
     var maxLineWidth = height/220; //was 4.0
