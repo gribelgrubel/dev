@@ -20,7 +20,7 @@ $(document).ready(function () {
     var targetFontSize; // the value to grow/shrink fontSize to
     var minFontSize; // the smallest the font should be, based on fontSize
     var maxFontSize;
-    var letterSpacing = 0.95;   //was 0.85
+    var letterSpacing = 0.85;   //was 0.85
     var letterEasing = 0.05; //amount of easing when letters jump to new positions on edgeCollision
     var minLineWidth = height/500;  //was 1.5 for 1920x1080res
     var maxLineWidth = height/220; //was 4.0
@@ -72,7 +72,17 @@ $(document).ready(function () {
         ctx.font = fontStyle + " " + minFontSize + "px PX Grotesk";
         ctx.fillText(text, 0, 0);
         var newMinTextWidth = Math.round(ctx.measureText(text).width * localLetterSpacing);
+        //var minTextWidth = (Math.abs(ctx.measureText(text).actualBoundingBoxLeft) + Math.abs(ctx.measureText(text).actualBoundingBoxRight));  //uses bounding boxes
         //console.log("returned minTextWidth: "+newMinTextWidth);
+        
+        //DEV METHOD: make pixel widths more narrow? since origin is depended on letterwidth before self, apply to instead normal styles?
+        if (object.fontStyle == "normal") {
+            //console.log("i am normal and welladjusted");
+            newMinTextWidth -= Math.round((newMinTextWidth/100) * 10);  //subtract some when next letter is pixel
+        } else {
+            newMinTextWidth += Math.round((newMinTextWidth/100) * 20);  //add some when next letter is normal
+        }
+        
         return newMinTextWidth;
     }
 
@@ -91,6 +101,15 @@ $(document).ready(function () {
         ctx.fillText(text, 0, 0);
         var newMaxTextWidth = Math.round(ctx.measureText(text).width * localLetterSpacing);
         //console.log("returned maxTextWidth: "+newMaxTextWidth);
+        
+        //DEV METHOD: make pixel widths more narrow? since origin is depended on letterwidth before self, apply to instead normal styles?
+        if (object.fontStyle == "normal") {
+            //console.log("i am normal and welladjusted");
+            newMaxTextWidth -= Math.round((newMaxTextWidth/100) * 10);  //subtract some when next letter is pixel
+        } else {
+            newMaxTextWidth += Math.round((newMaxTextWidth/100) * 20);  //add some when next letter is normal
+        }
+        
         return newMaxTextWidth;
     }
 
@@ -107,6 +126,10 @@ $(document).ready(function () {
                 textStyle = "normal";
             }
             currLett.fontStyle = textStyle;
+            //here we need to call the widthChange function to calculate new letter width for current style, and pass that to the word when it draws the letters
+            currLett.minTextWidth = getMinTextWidth(currLett);
+            currLett.maxTextWidth = getMaxTextWidth(currLett);
+            //console.log(currLett.letter + " " + currLett.minTextWidth + " " + currLett.maxTextWidth);
         }
     }
 
@@ -116,9 +139,9 @@ $(document).ready(function () {
         var fontSizeMult = (fontSize * verticalOffsetMult) * 0.1; //scaling factor to account for min-max fontSize
         for (q = 0; q < letterCount; q++) {
             var currLett = object.letters[q];
-            //remove letter moving on eckenditsch, too noisy
-            //currLett.newY = Math.round(random(-valueClamp * fontSizeMult, valueClamp * fontSizeMult));
+            // below: disabled indiv letter randommove on eckenditsch
             // for x+y values: rounding to integers prevents inprecise vis and makes the animation look smooth!
+            //currLett.newY = Math.round(random(-valueClamp * fontSizeMult, valueClamp * fontSizeMult));
             //currLett.newX = Math.round(random(-valueClamp/2 * fontSizeMult, valueClamp/2 * fontSizeMult)); //slightly smaller valuespace to keep readable
         }
     }
