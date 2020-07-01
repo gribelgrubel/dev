@@ -79,7 +79,7 @@ $(document).ready(function () {
         //var minFontSize = minFontSize;
         var localFontStyle = object.fontStyle;
         ctx.font = localFontStyle + " " + minFontSize + "px PX Grotesk";
-        ctx.fillText(text, 0, 0);
+        ctx.fillText(text, 0, -height); //paint above canvas, out of sight
         var newMinTextWidth = Math.round(ctx.measureText(text).width * localLetterSpacing);
         //var newMinTextWidth = (Math.abs(ctx.measureText(text).actualBoundingBoxLeft) + Math.abs(ctx.measureText(text).actualBoundingBoxRight));  //uses bounding boxes
         //console.log("returned minTextWidth: "+newMinTextWidth);
@@ -87,7 +87,7 @@ $(document).ready(function () {
         //DEV METHOD: adjust letterwidth individually (to adjust letter's right distance to next neighbor)
         switch (object.letter) {    // letters regardless of style
             case "l":
-                newMinTextWidth -= (newMinTextWidth/100) * 25;
+                newMinTextWidth -= (newMinTextWidth/100) * 10;
                 break;
             case "(":
                 newMinTextWidth -= (newMinTextWidth/100) * 30;
@@ -106,10 +106,13 @@ $(document).ready(function () {
                     newMinTextWidth += (newMinTextWidth/100) * 8;
                     break;   
             }
-            //newMaxTextWidth -= Math.round((newMaxTextWidth/100) * 10);  //subtract some when next letter is pixel
+            //newMinTextWidth += (newMinTextWidth/100) * 5;  //add some when next letter is pixel
             
         } else if (object.fontStyle == "oblique") { // only pixel-styled letters
             switch (object.letter) {
+                case "d":
+                    newMinTextWidth += (newMinTextWidth/100) * 5;
+                    break;
                 case "h":
                     newMinTextWidth += (newMinTextWidth/100) * 5;
                     break;
@@ -117,7 +120,7 @@ $(document).ready(function () {
                     newMinTextWidth += (newMinTextWidth/100) * 10;
                     break;
                 case "r":
-                    newMinTextWidth += (newMinTextWidth/100) * 5;
+                    newMinTextWidth += (newMinTextWidth/100) * 10;
                     break;
                 case "(":
                     newMinTextWidth -= (newMinTextWidth/100) * 5;
@@ -135,7 +138,7 @@ $(document).ready(function () {
             //newMaxTextWidth += Math.round((newMaxTextWidth/100) * 20);  //add some when next letter is normal   
         }
         
-        return newMinTextWidth;
+        return Math.round(newMinTextWidth);
     }
 
     function getMaxTextWidth(object) {
@@ -150,7 +153,7 @@ $(document).ready(function () {
         //var maxFontSize = maxFontSize;
         var localFontStyle = object.fontStyle;
         ctx.font = localFontStyle + " " + maxFontSize + "px PX Grotesk";
-        ctx.fillText(text, 0, 0);
+        ctx.fillText(text, 0, -height); //paint above canvas, out of sight
         var newMaxTextWidth = Math.round(ctx.measureText(text).width * localLetterSpacing);
         //console.log("returned maxTextWidth: "+newMaxTextWidth);
         

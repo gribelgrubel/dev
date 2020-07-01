@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="resources/swiper.min.css">
         
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" src="resources/fontfaceobserver.js"></script>
         
         <!-- Matomo -->
         <script type="text/javascript">
@@ -94,8 +95,9 @@
                                 
                 <div class="galeriecatg marginchild">
                     <h2 class="blue clickable"><span class="dropIcon">↓</span> Stadtrundgang</h2>
-                    <!--<div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>-->
-                    <!-- below: Galerie, disable again for release as long as no pictures are there -->
+                    <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
+                    <!-- below: Galerie, disabled until pictures are there -->
+                    <!--
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide"></div>
@@ -107,6 +109,7 @@
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
                     </div>
+                    -->
                     
                 </div>
                 
@@ -124,12 +127,10 @@
             
             <div class="section content-block" id="team">
                 
-                <h1 class="marginless green bordered">Team</h1>
                 <div class="content_text">
-                    <p>Das Erscheinungsbild des Rundgang Finkenau 2020 wurde von Studierenden des Studiengang Kommunikationsdesign an der Fakultät DMI der HAW Hamburg unter der Leitung von Paul Rutrecht und Hendrike Schmietendorf gestaltet: Frederik Engelbrecht, Georg Randel, Janna Thaden, Laura Dunse, Mert Ekinci, Rebecca Söhlke.</p>
                     <table id="teamtable">
                         <tr>
-                            <th><h2 class="orange bordered">Studierende</h2></th>
+                            <th><h1 class="orange bordered">Team Rundgang</h1></th>
                         </tr>
                         <tr>
                             <td>Georg Randel</td>
@@ -288,7 +289,7 @@
                     });
                     if (firstOpen == true) {
                         console.log("sliding to next");
-                        mySwiper.slideNext(300);
+                        mySwiper.slideNext(600);
                         firstOpen = false;
                         console.log(firstOpen);
                     } else if (firstOpen == false ) {
