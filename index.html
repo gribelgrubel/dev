@@ -109,6 +109,7 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
+                            <div class="swiper-slide"></div>
                             <div class="swiper-slide instapic"></div>
                             <div class="swiper-slide instapic"></div>
                             <div class="swiper-slide instapic"></div>
@@ -518,8 +519,9 @@
                     for (s=0;s<MultiImageCount;s++) { InstaSlides[s].appendChild(MultiImages[s]); console.log("aaa"); }
                     var Images = document.querySelectorAll(".instagram-image");
                     var ImageCount = Images.length;
-                    for (s=0;s<ImageCount;s++) { InstaSlides[s+MultiImageCount].appendChild(Images[s]); console.log("aaa"); }
+                    for (s=0;s<ImageCount;s++) { InstaSlides[s+MultiImageCount].appendChild(Images[s]); console.log("aaa");}
                     swiper_socialmedia.update();
+                    swiper_socialmedia.slideTo(0, 600);
                 },
                 'styling': true,
                 'getData': true,
@@ -578,6 +580,7 @@
             var swiper_socialmedia = new Swiper('.swiper-container-insta', {
                 direction: 'horizontal',
                 loop: false,
+                observer: true,
                 slidesPerView: 'auto',  //was 2
                 spaceBetween: 20,
                 centeredSlides: true,
@@ -641,11 +644,13 @@
                     if (firstOpen == true) {
                         console.log("sliding to next");
                         swiper_rundgangVorjahr.slideNext(600);
+                        swiper_socialmedia.slideNext(600);
                         firstOpen = false;
                         console.log(firstOpen);
                     } else if (firstOpen == false ) {
                         console.log("sliding to first");
                         swiper_rundgangVorjahr.slideTo(0, 600);
+                        swiper_socialmedia.slideTo(0, 600);
                         firstOpen = true;
                         console.log(firstOpen);
                     }
