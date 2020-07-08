@@ -1,0 +1,362 @@
+diff a/index.html b/index.html	(rejected hunks)
+@@ -314,9 +314,12 @@
+     
+     <!-- animated typo -->
+     <!-- from https://www.html5canvastutorials.com/advanced/html5-canvas-bouncing-balls/ -->
+-    <script type="text/javascript">
++    <script>
++        $(document).ready(function() {
++        
+         var canvas = document.querySelector('#animCanvas');
+         var ctx = canvas.getContext('2d');
++        
+ 
+         var width = canvas.width = window.innerWidth;
+         var height = canvas.height = window.innerHeight;
+@@ -331,6 +334,7 @@
+         var targetFontSize;
+         var minFontSize;    // the smallest the font should be, based on fontSize
+         var maxFontSize;
++        var letterSpacing = 0.85;
+         if (window.screen.width * window.devicePixelRatio > window.screen.height * window.devicePixelRatio) {
+                 //console.log("width is bigger");
+                 fontSize = Math.round(height / 2);
+@@ -344,19 +348,48 @@
+             }
+         var fontStyle = "normal"; // normal or oblique, alternating on edgecollision
+         var fontCase = 0; // 0: normal, 1: oblique
++        ctx.font = "normal " + fontSize + "px PX Grotesk";
++        ctx.font = "normal " + fontSize + "px PX Grotesk";
++        ctx.strokeStyle = "black";
+         
+         var scroll; //gets scroll distance from top
+ 
+         // function to generate random number
+-
+         function random(min, max) {
+             var num = Math.floor(Math.random() * (max - min)) + min;
+             // if min = 10 max = 15 random var = 0.1544465; it will return approzimately 10 because of math.floor
+             return num;
+         }
++ 
++        function getMinTextWidth(text, minFontSize, fontStyle) {
++            ctx.font = fontStyle + " " + minFontSize + "px PX Grotesk";
++            ctx.fillText(text, 0, 0);
++            var minTextWidth = ctx.measureText(text).width;
++            var minTextWidth = (Math.abs(ctx.measureText(text).actualBoundingBoxLeft) + Math.abs(ctx.measureText(text).actualBoundingBoxRight));
++            return minTextWidth;
++        }
++            
++        function getMaxTextWidth(text, maxFontSize, fontStyle) {
++            ctx.font = fontStyle + " " + maxFontSize + "px PX Grotesk";
++            ctx.fillText(text, 0, 0);
++            var maxTextWidth = ctx.measureText(text).width;
++            var maxTextWidth = (Math.abs(ctx.measureText(text).actualBoundingBoxLeft) + Math.abs(ctx.measureText(text).actualBoundingBoxRight));
++            return maxTextWidth;
++        }
++            
++        // called after velocity inversion (edge detection), gets object's font style and inverts it
++        function fontStyleChange(object) {
++            var textStyle = object.fontStyle;
++            if (textStyle == "normal") {
++                textStyle = "oblique";
++            } else {
++                textStyle = "normal";
++            }
++            return textStyle;
++        }
+ 
+         function Ball(identifier) {
+-            this.x = random(0, -width/2);  //ONLY FOR INITIALIZATION; was 0, width; this spawns them only the first screen quarter, so no long word gets stuck
++            this.x = random(0, -width);  //ONLY FOR INITIALIZATION; was 0, width; this spawns them only the first screen quarter, so no long word gets stuck
+             this.y = random(0+fontSize, height); //was 0, height; but this makes thigns get stuck
+             // move all things in from one side and out from another? this might help with creating intro & outro states
+             this.velX = random(4, 7);  //was -7,7; now only positive to make things slide in from beyond the left canvas border
+@@ -367,80 +400,133 @@
+             this.word = words[identifier];
+             this.index = identifier;
+             this.fontStyle = "normal";
++            this.textWidth = getMaxTextWidth(this.word, fontSize, this.fontStyle)*letterSpacing;    //deprecated, for initialization only
++            this.defaultTextWidth = this.textWidth * letterSpacing;
+             
+-            //getTextWidth(this);   //cant return valid values
+-            //draw text once to get correct textWidth
+-            ctx.font = this.fontStyle + " " + fontSize + "px PX Grotesk";
+-            ctx.fillText(this.word, this.x, this.y);
+-            this.textWidth = ctx.measureText(this.word).width;
+-            this.defaultTextWidth = this.textWidth;
+-            this.x = -this.textWidth*1.5;   //REAL spawn point outside of canvas based on final textWidth value
+-            //console.log("Word width: "+this.textWidth)
++            this.x = -this.textWidth*1.2;   //REAL spawn point outside of canvas based on final textWidth value
+             
+             this.introState = true; // true when spawning for as long as the word is outside the canvas bounds, to prevent getting stuck in velocity switching
+             this.timeCount = 0;  //counting up to delay;
++            
+             // below: individual letters as child elements
+             this.characters = Array.from(this.word);   //split word array into single letters
+             this.letters=[];    //array to be filled with letter objects
+-            //console.log(this.letters);
+-        }
+-        
+-        Ball.getLetters = function() {
+-            for (i=0;i<this.characters.length;i++) {
+-                var letter = new Letter(this.characters[i]);
+-                    letters.push(letter);
++
++            this.getLetters = function() {
++                for (j=0;j<this.characters.length;j++) {    //don't use same countervar as the parent loop where this gets called!
++                    var LetterFontStyle = "normal";
++                    if (j % 2 === 0) { // index is even
++                        LetterFontStyle = "oblique";
++                    }
++                    var letter = new Letter(this.characters[j],this.color,LetterFontStyle);
++                    this.letters.push(letter);     
++                }
++                //console.log(this.letters);
++            }
++            
++            this.widthChange = function() {
++                var letterWidthSum= [];
++                for (m=0;m<this.characters.length;m++) {
++                    letterWidthSum.push(this.letters[m].maxTextWidth); 
++                }
++                var wordWidth = letterWidthSum.reduce(function (accumulator, currentValue) {
++                      return accumulator + currentValue
++                    }, 0) * letterSpacing;
++                return wordWidth;
+             }
++            
++            //this.textWidth = this.widthChange(); 
+         }
+         
++        
+         // this has to be nested inside the Ball constructor
+         function Letter(character, color, fontStyle) {
+-            this.x;  //relative to parent container origin: origin + this.margin + this.width
+-            this.y;  //relative to parent container origin: origin + this.margin + this.height
+-            this.velX = 0;  //was -7,7; now only positive to make things slide in from beyond the left canvas border
++            this.x = 0;  //relative to parent container origin: origin + this.margin + this.width
++            this.y = random(-40,40);  //relative to parent container origin: origin + this.margin + this.height
++            this.velX = 0;  
+             this.velY = 0;
+             this.margin; //maybe percentage of fontSize?
+-            this.color = color//inherit container Ball color
++            this.color = color//inherit container Ball color; needed?
+             this.letter = character;
+             this.fontStyle = fontStyle;
++            this.minTextWidth = getMinTextWidth(this.letter,minFontSize,this.fontStyle);
++            this.maxTextWidth = getMaxTextWidth(this.letter,maxFontSize,this.fontStyle);
+         }
+         
+-        Letter.prototype.draw = function(){
+-            ctx.beginPath();
+-            ctx.fillStyle = this.color;
+-            ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI); //text origin: bottom left corner (canvas gets drawn from top left)
+-            //ctx.rect(this.x, this.y - fontSize, this.x+this.textWidth, this.y); //object boundaries
+-            ctx.fill();
+-            ctx.font = this.fontStyle + " " + fontSize + "px PX Grotesk";
+-            ctx.fillText(this.letter, this.x, this.y);
+-            ctx.strokeStyle = 'black';
+-            ctx.lineWidth = 4;
+-            ctx.strokeText(this.letter, this.x, this.y);
++        Letter.prototype.update = function() {
++            //this is where things like individual letter movement get  calculated
++            /* //fake code
++            if (collision detected) {
++                this.velX = Ball velX;
++                this.velY = Ball velY;
++                
++                for (i=0; i<edgeTime; i++) {
++                    //to make letter crouch together, this most likely needs the margin value, as well
++                    this.x += velX;
++                    this.y *= velY;
++                }
++            }
++            */
+         }
+-
++        
+         Ball.prototype.draw = function() {
+             ctx.beginPath();
+             ctx.fillStyle = this.color;
+             ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI); //text origin: bottom left corner (canvas gets drawn from top left)
+-            //ctx.rect(this.x, this.y - fontSize, this.x+this.textWidth, this.y); //object boundaries
++            //ctx.strokeRect(this.x, this.y - fontSize, this.textWidth, fontSize); //object boundaries
+             ctx.fill();
+             ctx.font = this.fontStyle + " " + fontSize + "px PX Grotesk";
++            ctx.lineWidth = 4;
++
++            //NEW: FEATURING SINGLE LETTERS
++            var textWidthSum = [];  //collects letter widths to get new start x for next letter
++            for (k = 0; k < this.letters.length; k++) {
++                var currX;
++                currX = textWidthSum.reduce(function (accumulator, currentValue) {
++                  return accumulator + currentValue
++                }, 0) * letterSpacing;  // sum of all current textWidthSum array values multiplied with letter-spacing
++                //console.log("currX: "+currX);
++                //console.log(textWidthSum);
++                ctx.fillText(
++                    this.letters[k].letter, 
++                    this.x + currX,
++                    this.y + this.letters[k].y
++                );
++                
++                ctx.strokeText(this.letters[k].letter, this.x + currX, this.y + this.letters[k].y);
++                /*
++                ctx.strokeRect(this.x + this.letters[k].x + (this.letters[k].maxTextWidth) * k,
++                               this.y + this.letters[k].y - fontSize, 
++                               this.letters[k].maxTextWidth,
++                               fontSize
++                              ); //object boundaries
++                */     
++                //ctx.strokeText(this.word, this.x, this.y);    //dev
++                textWidthSum.push(this.letters[k].maxTextWidth);    // after letter gets drawn, add it's width to textWidthSum
++            }
++            
++            //below: working word draw
++            /*
+             ctx.fillText(this.word, this.x, this.y);
+             ctx.strokeStyle = 'black';
+             ctx.lineWidth = 4;
+             ctx.strokeText(this.word, this.x, this.y);
++            */
++            
++            this.return
+         }
+ 
+         Ball.prototype.update = function() {
+             //compare right wordedge and right screenborder
+             if ((this.x + this.textWidth) >= width) {
+-                this.velX = -(this.velX);
++                this.velX = -(Math.abs(this.velX));
+                 this.velY = this.velY + random(-1,1);   //some randomness for the y-axis
+                 this.fontStyle = fontStyleChange(this);
+             }
+             
+             // compare left wordedge and left screenborder
+             if ((this.x/* - this.textWidth*/) <= 0 && this.introState==false) {
+-                this.velX = -(this.velX);
++                this.velX = Math.abs(this.velX);
+                 this.fontStyle = fontStyleChange(this);
+             } else if (this.x > 2){
+                 this.introState = false
+@@ -454,7 +540,7 @@
+ 
+             // compare font height with top screenedge; font boundaries are larger than visuals, so reduce a bit
+             if ((this.y - (fontSize/1.5)) <= 0) {
+-                this.velY = -(this.velY);
++                this.velY = Math.abs(this.velY);
+                 this.fontStyle = fontStyleChange(this);
+             }
+ 
+@@ -500,30 +586,6 @@
+         }
+         */
+ 
+-        // called after velocity inversion (edge detection), gets object's font style and inverts it
+-        function fontStyleChange(object) {
+-            var textStyle = object.fontStyle;
+-            if (textStyle == "normal") {
+-                textStyle = "oblique";
+-            } else {
+-                textStyle = "normal";
+-            }
+-            return textStyle;
+-        }
+-        
+-        /*
+-        //broken, doesnt seem to be able to paint on canvas to get width
+-        function getTextWidth(object) {
+-            var newTextWidth;
+-            var test = "woah!";
+-            ctx.font = fontStyle + " " + fontSize + "px PX Grotesk";
+-            ctx.fillText(object.word, object.x, object.y);
+-            object.textWidth = ctx.measureText(object.word).width; //gives correct values, but makes text jitter vertically
+-            //return newTextWidth;
+-            return test;
+-        }
+-        */
+-
+         
+         function loop() {
+             ctx.clearRect(0, 0, width, height);
+@@ -531,14 +593,16 @@
+             while (balls.length < wordCount) {
+                 for (i = 0; i < wordCount; i++) {
+                     var ball = new Ball(i);
+-                    console.log(ball);
++                    ball.getLetters();
++                    //console.log(ball);
+                     balls.push(ball);
+                 }
+-                for (i=0;i<balls.length;i++) {
+-                    var currBall = balls[i];
+-                    console.log(currBall);
+-                    //currBall.getLetters();
++                /*
++                for (i=0; i < wordCount; i++) { //this somehow only fills out two words' letters, why? 
++                    //balls[i].getLetters();
++                    console.log(balls[i]);
+                 }
++                */
+             }
+ 
+             for (i = 0; i < balls.length; i++) {
+@@ -550,19 +614,18 @@
+             window.onscroll = function() {scrollFunction()};
+             function scrollFunction() {
+               if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+-                      targetFontSize = minFontSize;
+-                      /*
+-                      for (i=0;i<wordCount;i++){
+-                          balls[i].textWidth = balls[i].textWidth * 0.98
+-                      }
+-                      */
++                    targetFontSize = minFontSize;
++                      
++                    for (i=0;i<wordCount;i++){
++                        balls[i].textWidth = balls[i].widthChange(); 
++                    }
++                      
+               } else if (document.body.scrollTop < 81 || document.documentElement.scrollTop < 81) {
+                       targetFontSize = maxFontSize;
+-                    /*
++                  
+                     for (i=0;i<wordCount;i++){
+-                          balls[i].textWidth = balls[i].defaultTextWidth;
+-                      }
+-                      */
++                        balls[i].textWidth = balls[i].widthChange(); 
++                    }
+               }
+             }
+ 
+@@ -573,6 +636,7 @@
+         
+         initialize();
+         
++            
+         function initialize() {
+            // Register an event listener to call the resizeCanvas() function 
+            // each time the window is resized.
+@@ -589,17 +653,17 @@
+             height = canvas.height = window.innerHeight;
+             
+             if (window.screen.width * window.devicePixelRatio > window.screen.height * window.devicePixelRatio) {
+-                console.log("width is bigger");
++                //console.log("width is bigger");
+                 fontSize = Math.round(height / 2);
+                 minFontSize = Math.round(fontSize / 4);
+             } else {
+-                console.log("height is bigger");
++                //console.log("height is bigger");
+                 fontSize = Math.round(width / 2);
+                 minFontSize = Math.round(fontSize / 4);
+             }
+         }
+              
+-        
++        });
+     </script>
+ 	
+ </body>

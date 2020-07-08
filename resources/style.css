@@ -141,7 +141,7 @@ h2{
     margin:0;
 }
 
-h3{
+h1, h3{
     margin:0;
     -webkit-text-stroke: 1.5px black; /* not fully supported, add solution with 4 text-shadows! */
 }
@@ -156,7 +156,7 @@ h3{
     flex-wrap:wrap;
     */
     width:100%;
-    min-height:calc(100vh - 4em);
+    min-height:calc(100vh - 5em);
 }
 
 #animCanvas{
@@ -216,7 +216,7 @@ h3{
 /* Swiper */
 .swiper-container {
     width: 100%;
-    height: auto;
+    height: 100%;
     /*display:none; *//* intially not visible, getstoggled by clicking agaleriectg*/
 }
 
@@ -240,6 +240,90 @@ h3{
 }
 .swiper-button-prev:focus, .swiper-button-next:focus{outline-width:0;}
 
+.swiper-button-prev, .swiper-button-next {
+    display:none !important;
+}
+
+.swiper-slide{
+    
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    
+    flex-shrink:1;
+    /*
+    width:60%; */
+    width:fit-content !important;
+}
+
+.fotocontainer{
+    
+}
+
+/* Slide Image */
+.foto{
+    height:50vh;
+    display:block;
+}
+
+.fototext{
+    display:block;
+}
+
+
+
+
+/* dev slider 2*/
+    .swiper-container2 {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide2 {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      width: 60%;
+    }
+
+    .swiper-slide2:nth-child(2n) {
+      width: 40%;
+    }
+
+    .swiper-slide2:nth-child(3n) {
+      width: 20%;
+    }
+
+
+
+
+
+
+
+
 
 /* GALERIE */
 
@@ -248,6 +332,7 @@ h3{
     vertical-align: bottom;
 }
 
+/*
 .swiper-slide-active img{
     display: block;
     margin-left: auto;
@@ -256,6 +341,7 @@ h3{
     max-height:80vh;
     width:auto;
 }
+*/
 
 /* Dropdown Icon */
 .dropIcon{
@@ -285,9 +371,6 @@ h3{
     margin-bottom:1em;
 }
 
-/* Pop-Ups */
-.foto{
-}
 
 
 /* TEAM */
@@ -304,24 +387,6 @@ h3{
     padding-right:1em;
 }
 
-
-
-
-
-/* ARMGART Event-Erinnerung */
-#armgart{
-}
-
-.armgart-popup{
-    margin:20vh auto;
-    display: block;
-    width: fit-content;
-    vertical-align: center;
-    /*
-    bottom:20%;
-    left:30%;
-    */
-}
 
 #backtotop{
     position: static;

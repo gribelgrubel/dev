@@ -17,6 +17,7 @@
         
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script type="text/javascript" src="resources/fontfaceobserver.js"></script>
+        <script type="text/javascript" src="resources/jquery.initialize.min.js"></script>
         
         <!-- Matomo -->
         <script type="text/javascript">
@@ -49,14 +50,14 @@
 
             <div id="landingcanvas">
                 <div class="footer-link" style="margin:0.25em;position:absolute;top:0;right:0;font-size:4em;">
-                        <a target="_blank" href="https://design.haw-hamburg.de/home/das-department-design/">
+                        <a target="_blank" rel="noreferrer" href="https://design.haw-hamburg.de/home/das-department-design/">
                         <img class="footerlogo" src="resources/haw-logo.svg" alt="HAW Hamburg"></a>
                 </div>
             </div>
 
             <div class="section content-block" id="eingangstext">
                 <div class="slide">
-                    <h3 class="green">The end(s) of the world?</h3>
+                    <h1 class="green">The end(s) of the world?</h1>
                     <p class="textblock">Stehen wir am Ende der Welt? Oder an einem Ende? Welche Welt könnte hier enden? Oder ist nicht vielmehr so: Corona zeigt, wie alle Enden der Welt zusammenhängen? Zusammenhänge werden offensichtlich. Die Welt ist eine Kugel. Es geht immer weiter, nur anders.</p>
                 </div>
 
@@ -96,34 +97,296 @@
                 <div class="galeriecatg marginchild">
                     <h2 class="blue clickable"><span class="dropIcon">↓</span> Stadtrundgang</h2>
                     <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
-                    <!-- below: Galerie, disabled until pictures are there -->
-                    <!--
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide"></div>
-                            <div class="swiper-slide"><img src="img/litfass.png" class=foto></div>
-                            <div class="swiper-slide"><img src="img/billboard.png" class=foto></div>
-                            <div class="swiper-slide"><img src="img/litfass.png" class=foto></div>
-                            <div class="swiper-slide"><img src="img/subway-ad.png" class=foto></div>
-                        </div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
-                    </div>
-                    -->
+                    
                     
                 </div>
                 
                 <div class="galeriecatg marginchild">
                     <h2 class="green clickable"><span class="dropIcon">↓</span> Social Media</h2>
-                    <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
+                    <!--<div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>-->
+                    <div class="fototext" style="display: none"><a href="https://www.instagram.com/haw_dmi/">@HAW_DMI</a></div>
+                    <div class="powr-instagram-feed" id="4961bda8_1560716479"></div>
+                    <script src="https://www.powr.io/powr.js?platform=html"></script>
+                    
                 </div>
                 
                 <div class="galeriecatg marginchild">
-                    <h2 class="grey clickable"><span class="dropIcon">↓</span> Rundgang 2019/20</h2>
-                    <div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>
+                    <h2 class="grey clickable"><span class="dropIcon">↓</span> Rundgänge 2019/20</h2>
+                    <!--<div class="coming-soon" style="display:none;"><p>Coming soon!</p></div>-->
+                    <!-- below: Galerie, disabled until pictures are there -->
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            
+                            <div class="swiper-slide"></div>
+                            
+                            <div class="swiper-slide">
+                                <div class="fotocontainer">
+                                    <img src="img/rg_armgart/_MG_5711-min.jpg" 
+                                         class="foto swiper-lazy">
+                                    <div class="fototext">Rundgang Armgartstraße<br> Winter 2020</div>
+                                    <div class="swiper-lazy-preloader"></div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="img/rg_armgart/_MG_5267-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5300-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5348-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5445-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5450-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5497-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5504-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5528-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5559-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5634-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5727-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5757-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5780-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5812-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_5921-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_6540-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_6588-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_6629-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_6687-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_armgart/_MG_6901-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <!-- below: Rundgang Finkenau -->
+                            <div class="swiper-slide">
+                                <div class="fotocontainer">
+                                        <img src="img/rg_finkenau/_MG_1211-min.jpg" 
+                                             class="foto swiper-lazy">
+                                        <div class="fototext">Rundgang Finkenau<br> Sommer 2019</div>
+                                        <div class="swiper-lazy-preloader"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_0741-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_0884-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_0918-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_0929-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_0944-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_0961-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1017-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1040-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1066-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1084-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1144-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1160-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1177-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1180-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1191-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1211-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1248-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1257-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1259-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1323-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1339-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1420-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1534-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1569-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1663-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1667-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <img data-src="img/rg_finkenau/_MG_1742-min.jpg" 
+                                     class="foto swiper-lazy">
+                                <div class="swiper-lazy-preloader"></div>
+                            </div>
+                            
+                            
+                            
+                            
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    </div>
+                    
                 </div>
-                                
             </div>
+                            
             
             <div class="section content-block" id="team">
                 
@@ -234,17 +497,31 @@
                 // Optional parameters
                 direction: 'horizontal',
                 loop: false,
-                slidesPerView: 2,
-                spaceBetween: 20,
+                slidesPerView: 'auto',  //was 2
+                //spaceBetween: 10,
                 centeredSlides: true,
                 centerInsufficientSlides: true,
-                autoHeight: true,
+                autoHeight: false,
+                // Disable preloading of all images
+                preloadImages: false,
+                // Enable lazy loading
+                lazy: true,
+                watchSlidesVisibility: true,
+                
+                freeMode:true,
+                freeModeMomentumRatio: 0.4,
+                //freeModeSticky:true,
+                slideToClickedSlide: true,
+                slidesOffsetBefore:100,
+               
 
                 // Navigation arrows
+                /*
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
+                */
 
                 // add these together with mobile css!
                 breakpoints: {
@@ -265,12 +542,31 @@
 
                 /* BETTER instead of having multiple loading sliders: https://swiperjs.com/api/#virtual */
             });
-
+            
+            /*
+            var swiperRundgangrevue = new Swiper('.swiper-container2', {
+              slidesPerView: 'auto',
+              centeredSlides: true,
+              spaceBetween: 30,
+              pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+              },
+            });
+            */
 
             /* instantly collapse sliders at start! */
             $(".swiper-container").each(function() {
                 $(this).slideToggle(0, function() {});
             });
+            /*
+            $(".powrLoaded").initialize( function(){
+                $(this).slideToggle(0, function() {});
+            });
+            */
+            $.initialize(".powrLoaded", function() {
+                $(this).slideToggle(0, function() {});
+            }, { target: document.getElementById('fotocarousel') });
 
             /* SLIDER für Galerien Expand*/
 
@@ -287,6 +583,7 @@
                         //mySwiper.slideNext(300);
                         //mySwiper.slideTo(0, 300);
                     });
+                    /*
                     if (firstOpen == true) {
                         console.log("sliding to next");
                         mySwiper.slideNext(600);
@@ -298,7 +595,7 @@
                         firstOpen = true;
                         console.log(firstOpen);
                     }
-                    
+                    */
                 })
             });
 
