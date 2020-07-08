@@ -33,18 +33,21 @@ $(document).ready(function () {
     var minLineWidth = height/500;  //was 1.5 for 1920x1080res
     var maxLineWidth = height/220; //was 4.0
     var scrollThreshold = 80;   //threshold after which font should change state from big/small and vice versa
+    var portraitMode = 0;
     if (window.screen.width * window.devicePixelRatio > window.screen.height * window.devicePixelRatio) { //initialization, larger width
         fontSize = Math.round(height / 2);
         minFontSize = Math.round(fontSize / 4);
         maxFontSize = Math.round(fontSize);
         minLineWidth = height/500;
         maxLineWidth = height/220;
+        portraitMode = 0;
     } else {    //initialization for canvas larger height
         fontSize = Math.round(width / 3.5);
         minFontSize = Math.round(fontSize / 3);
         maxFontSize = Math.round(fontSize);
         minLineWidth = height/400;
         maxLineWidth = height/250;
+        portraitMode = 1;
     }
     //console.log("minLineWidth: "+minLineWidth+" maxLineWidth: "+maxLineWidth);
     var verticalOffsetMult = minFontSize / maxFontSize; // used for letter y-offset when scaling
@@ -301,7 +304,12 @@ $(document).ready(function () {
         this.minTextWidth = Math.round(getMinTextWidth(this));
         this.maxTextWidth = Math.round(getMaxTextWidth(this));
 
-        this.x = -this.textWidth * 1.2; //was textWidth * 2; REAL spawn point outside of canvas based on final textWidth value
+        if (!portraitMode) {
+            this.x = -this.textWidth * 1.2; //was textWidth * 2; REAL spawn point outside of canvas based on final textWidth value
+        } else {
+            this.x = -this.textWidth * 2;
+        }
+        
 
         this.justSpawned = true;
         this.introState = true; // true when spawning for as long as the word is outside the canvas bounds, to prevent getting stuck in velocity switching
