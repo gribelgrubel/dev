@@ -308,6 +308,7 @@ $(document).ready(function () {
             this.x = -this.textWidth * 1.2; //was textWidth * 2; REAL spawn point outside of canvas based on final textWidth value
         } else {
             this.x = -this.textWidth * 2;
+            this.velX = -2;
         }
         
 
